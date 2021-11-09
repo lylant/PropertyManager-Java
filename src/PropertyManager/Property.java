@@ -13,7 +13,7 @@ public class Property {
     private int clientID;          // the client ID of the property's owner
 
     // the postcode should be String datatype to handle the postcode starting with 0
-    // rentWeekly is declared as double datatype for the further flexibility
+    // rentWeekly(the weekly charge) is declared as double datatype for the further flexibility
 
 
     /**

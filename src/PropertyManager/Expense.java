@@ -7,8 +7,7 @@ public class Expense {
     private String description;   // a description of the expense
     private double cost;          // the cost of the expense
     private String date;          // the date on which the expense was incurred
-
-    // the cost is declared as double datatype for the further flexibility
+    
     // As this class is not used for processing date, the date is String datatype for the simplicity
     // the date is in yyyy-MM-dd format
 
