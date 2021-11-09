@@ -114,6 +114,17 @@ public class Client {
     }
 
     /**
+     * Set both data fields for the name, the firstName and the lastName, with given a parameter
+     *
+     * @param fullName - the client's name in the format: "firstName lastName"
+     */
+    public void setFullName(String fullName) {
+        String[] splitName = fullName.split("\\s+"); // split the fullName String by whitespace
+        firstName = splitName[0];
+        lastName = splitName[1];
+    }
+
+    /**
      * @param street - the street of the client's postal address
      */
     public void setStreet(String street) {
