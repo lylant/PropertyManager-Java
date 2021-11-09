@@ -36,6 +36,8 @@ public class Main {
             option = loadingProperties();
         if (option != 0)
             option = loadingExpenses();
+        if (option != 0)
+            option = loadingRents();
 
     }
 
@@ -104,6 +106,25 @@ public class Main {
 
         // return the reference of the new instance of Expense
         return newExpense;
+    }
+
+    /**
+     * Instantiate a new Rent object.
+     * The data fields of the new object will be setted with next dataset from the Scanner parameter.
+     *
+     * @param input - Scanner object to read the source file
+     * @return the reference of the new Rent object
+     */
+    static Rent instantiateRent(Scanner input) {
+        // instantiate a new Rent object
+        Rent newRent = new Rent();
+
+        newRent.setPropertyID(input.nextInt());
+        newRent.setRentAmount(input.nextDouble());
+        newRent.setDate(input.next());
+
+        // return the reference of the new instance of Rent
+        return newRent;
     }
 
 
@@ -182,7 +203,7 @@ public class Main {
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
 
-        // instantiate objects of Client and store them in the arraylist
+        // instantiate objects of Property and store them in the arraylist
         while(inputFile.hasNext()) {
             properties.add(instantiateProperty(inputFile));
         }
@@ -193,7 +214,7 @@ public class Main {
 
     /**
      * Loading the expenses records from the source file. The records will be stored in the global
-     * arraylist "expenses". Each Property object in the arraylist represents an individual expense.
+     * arraylist "expenses". Each Expense object in the arraylist represents an individual expense.
      *
      * @return the flag of loading status. "-1": successful, "0": failed
      */
@@ -224,9 +245,51 @@ public class Main {
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
 
-        // instantiate objects of Client and store them in the arraylist
+        // instantiate objects of Expense and store them in the arraylist
         while(inputFile.hasNext()) {
             expenses.add(instantiateExpense(inputFile));
+        }
+
+        // successfully loading completed
+        return -1;
+    }
+
+    /**
+     * Loading the rents records from the source file. The records will be stored in the global
+     * arraylist "rents". Each Rent object in the arraylist represents a single rent collection.
+     *
+     * @return the flag of loading status. "-1": successful, "0": failed
+     */
+    static int loadingRents() {
+        // initialize Scanner object references
+        Scanner inputFile = null;
+
+        // read the rents file and instantiate Scanner objects
+        while(!fileRents.equals("exit")) {
+            try {
+                File sourceFile = new File(fileRents);
+                inputFile = new Scanner(sourceFile);
+                break; // successfully read
+
+            } catch (FileNotFoundException exception) {
+                System.out.println("Error - File not found: " + exception.getMessage());
+                System.out.println("\nEnter the name of the file that is to be read."
+                        + " Type \"exit\" to exit.");
+                System.out.print("File Name?: ");
+                fileRents = kb.nextLine(); // get a new file name to be read
+            }
+        }
+
+        // terminate the program if the user entered "exit"
+        if(fileRents.equals("exit"))
+            return 0;
+
+        // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
+        inputFile.useDelimiter(",|\n|\r\n");
+
+        // instantiate objects of Rent and store them in the arraylist
+        while(inputFile.hasNext()) {
+            rents.add(instantiateRent(inputFile));
         }
 
         // successfully loading completed
