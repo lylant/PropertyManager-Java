@@ -9,8 +9,8 @@ public class Menu {
     private static Scanner kb = new Scanner(System.in);
 
     // set some special numbers for the menu selection
-    private static int optionMin = 1;  // a minimum digit number of the option list
-    //private static int optionExit = 0; // a digit number to choose the exit program option
+    private static int optionMin = EnvManager.getMenuOptionMin();   // min digit of menu list
+    private static int optionExit = EnvManager.getMenuOptionExit(); // digit of exit option
 
 
     /**
@@ -28,15 +28,13 @@ public class Menu {
      * The last item of the parameter should be "Exit the Program" option.
      *
      * @param menu - an array representation of menu options
-     * @param optionExit - the digit number to choose the exit program option
      */
-    public static void displayMenu(String[] menu, int optionExit) {
+    public static void displayMenu(String[] menu) {
         System.out.println("\nWelcome, administrator. Please select the option below: \n");
         for (int i = 0; i < (menu.length - 1); i++) {
             System.out.println( "\t" + (i + optionMin) + ". " + menu[i]);
         }
         System.out.println("\t" + optionExit + ". " + menu[menu.length-1]);
-        System.out.print("\nEnter the option: ");
     }
 
 
@@ -44,23 +42,32 @@ public class Menu {
      * Obtains and validates digit option selections
      *
      * @param menu - an array representation of menu options
-     * @param optionExit - the digit number to choose the exit program option
      * @return the users selection from the available options
      */
-    public static int getMenuSelect(String[] menu, int optionExit) {
+    public static int getMenuSelect(String[] menu) {
 
-        int option = -1; // user input: a default value should not be one of the match case of options
+        int option = optionMin; // the user input for the menu selection
         int optionMax = menu.length + optionMin - 2; // a maximum digit number of the option list
 
         do {
+            // invalid input, print the error message
+            if (option < optionMin || option > optionMax)
+                System.out.println("\n[!] Invalid option. Please select a option with a digit number.");
+            System.out.print("\nEnter the option: ");
+
             try {
                 option = kb.nextInt();
                 kb.nextLine(); // consume "\n"
             } catch (InputMismatchException exception) {
-                System.out.println("Error - Datatype mismatch: " + exception.getMessage());
+                option = -1; // replace the option variable with no case match value
                 kb.nextLine(); // consume "\n"
             }
         } while ((option < optionMin || option > optionMax) && option != optionExit);
+
+        // received the valid selection, convert to numbers as 1, 2, 3... to fit the switch statement
+        // do not convert if the input is match as exiting the program
+        if (option != optionExit && (option - optionMin + 1) != optionExit)
+            option -= (optionMin - 1);
 
         return option;
     }
