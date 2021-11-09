@@ -3,16 +3,12 @@ package PropertyManager;
 public class Property {
 
     // DATA FIELDS
-    private int ID;                // a unique numeric identifier for a property
-    private String street;         // the street of the property address
-    private String suburb;         // the suburb of the address
-    private String state;          // the state of the address
-    private String postcode;       // the postcode of the address
-    private double rentWeekly;     // the rental amount charged for the property per week in dollars
-    private double managementRate; // the percentage of the weekly rent claimed for the management
-    private int clientID;          // the client ID of the property's owner
+    private int ID;                   // a unique numeric identifier for a property
+    private Address address;          // the property address
+    private double rentWeekly;        // the rental amount charged for the property per week in dollars
+    private double managementRate;    // the percentage of the weekly rent claimed for the management
+    private int clientID;             // the client ID of the property's owner
 
-    // the postcode should be String datatype to handle the postcode starting with 0
     // rentWeekly(the weekly charge) is declared as double datatype for the further flexibility
 
 
@@ -21,10 +17,7 @@ public class Property {
      */
     public Property() {
         ID = -1;
-        street = "N/A";
-        suburb = "N/A";
-        state = "N/A";
-        postcode = "0000";
+        address = new Address("N/A", "N/A", "N/A", "0000");
         rentWeekly = -1;
         managementRate = -1;
         clientID = -1;
@@ -42,35 +35,35 @@ public class Property {
      * @return the street of the property address
      */
     public String getStreet() {
-        return street;
+        return address.getStreet();
     }
 
     /**
      * @return the suburb of the property address
      */
     public String getSuburb() {
-        return suburb;
+        return address.getSuburb();
     }
 
     /**
      * @return the state of the property address
      */
     public String getState() {
-        return state;
+        return address.getState();
     }
 
     /**
      * @return the postcode of the property address
      */
     public String getPostcode() {
-        return postcode;
+        return address.getPostcode();
     }
 
     /**
      * @return the address of the property
      */
-    public String getAddress() {
-        return (street + ", " + suburb + ", " + state + " " + postcode);
+    public Address getAddress() {
+        return address;
     }
 
     /**
@@ -106,28 +99,28 @@ public class Property {
      * @param street - the street of the property address
      */
     public void setStreet(String street) {
-        this.street = street;
+        address.setStreet(street);
     }
 
     /**
      * @param suburb - the suburb of the property address
      */
     public void setSuburb(String suburb) {
-        this.suburb = suburb;
+        address.setSuburb(suburb);
     }
 
     /**
      * @param state - the state of the property address
      */
     public void setState(String state) {
-        this.state = state;
+        address.setState(state);
     }
 
     /**
      * @param postcode - the postcode of the property address
      */
     public void setPostcode(String postcode) {
-        this.postcode = postcode;
+        address.setPostcode(postcode);
     }
 
     /**
