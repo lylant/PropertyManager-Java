@@ -3,15 +3,10 @@ package PropertyManager;
 public class Client {
 
     // DATA FIELDS
-    private int ID;           // a unique numeric identifier for a client
-    private String firstName; // the client's given name
-    private String lastName;  // the client's surname
-    private String street;    // the street of the client's postal address
-    private String suburb;    // the suburb of the address
-    private String state;     // the state of the address
-    private String postcode;  // the postcode of the address
-
-    // the postcode should be String datatype to handle the postcode starting with 0
+    private int ID;                   // a unique numeric identifier for a client
+    private String firstName;         // the client's given name
+    private String lastName;          // the client's surname
+    private Address address;          // the client's postal address
 
 
     /**
@@ -21,10 +16,7 @@ public class Client {
         ID = -1;
         firstName = "N/A";
         lastName = "N/A";
-        street = "N/A";
-        suburb = "N/A";
-        state = "N/A";
-        postcode = "0000";
+        address = new Address("N/A", "N/A", "N/A", "0000");
     }
 
 
@@ -60,35 +52,35 @@ public class Client {
      * @return the street of the client's postal address
      */
     public String getStreet() {
-        return street;
+        return address.getStreet();
     }
 
     /**
      * @return the suburb of the client's postal address
      */
     public String getSuburb() {
-        return suburb;
+        return address.getSuburb();
     }
 
     /**
      * @return the state of the client's postal address
      */
     public String getState() {
-        return state;
+        return address.getState();
     }
 
     /**
      * @return the postcode of the client's postal address
      */
     public String getPostcode() {
-        return postcode;
+        return address.getPostcode();
     }
 
     /**
      * @return the postal address of the client
      */
-    public String getAddress() {
-        return (street + ", " + suburb + ", " + state + " " + postcode);
+    public Address getAddress() {
+        return address; // implicit call of address.toString()
     }
 
 
@@ -128,27 +120,27 @@ public class Client {
      * @param street - the street of the client's postal address
      */
     public void setStreet(String street) {
-        this.street = street;
+        address.setStreet(street);
     }
 
     /**
      * @param suburb - the suburb of the client's postal address
      */
     public void setSuburb(String suburb) {
-        this.suburb = suburb;
+        address.setSuburb(suburb);
     }
 
     /**
      * @param state - the state of the client's postal address
      */
     public void setState(String state) {
-        this.state = state;
+        address.setState(state);
     }
 
     /**
      * @param postcode - the postcode of the client's postal address
      */
     public void setPostcode(String postcode) {
-        this.postcode = postcode;
+        address.setPostcode(postcode);
     }
 }
