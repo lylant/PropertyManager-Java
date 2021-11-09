@@ -10,38 +10,29 @@ public class Main {
      */
 
     // Scanner object for the keyboard input
-    static Scanner kb = new Scanner(System.in);
+    private static Scanner kb = new Scanner(System.in);
+
+    // default source file names to be read
+    private static String fileClients = EnvManager.getFileClients();
+    private static String fileProperties = EnvManager.getFileProperties();
+    private static String fileExpenses = EnvManager.getFileExpenses();
+    private static String fileRents = EnvManager.getFileRents();
 
     // instantiate arraylist objects to bind references of each class
-    static ArrayList<Client> clients = new ArrayList<>();
-    static ArrayList<Property> properties = new ArrayList<>();
-    static ArrayList<Expense> expenses = new ArrayList<>();
-    static ArrayList<Rent> rents = new ArrayList<>();
+    private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Property> properties = new ArrayList<>();
+    private static ArrayList<Expense> expenses = new ArrayList<>();
+    private static ArrayList<Rent> rents = new ArrayList<>();
+
+    // attributes for the menu selection
+    private static String[] menuOptions = EnvManager.getMenuOptions(); // array of menu options
+    private static int menuOptionMin = EnvManager.getMenuOptionMin(); // min digit of menu list
+    private static int menuOptionExit = EnvManager.getMenuOptionExit(); // digit of exit option
 
     static boolean isSaved = true;
 
 
     public static void main(String[] args) {
-
-        /*
-         * Prepare the local variables
-         */
-
-        // default source file names to be read
-        String fileClients = "clients.txt";
-        String fileProperties = "properties.txt";
-        String fileExpenses = "expenses.txt";
-        String fileRents = "rents.txt";
-
-        // an array representation of menu options
-        String[] menuOptions = {"Record Rent Collection",
-                "Record Expense",
-                "Generate Portfolio Report",
-                "Save Changes",
-                "Exit the Program"};
-        int menuOptionInput = -1; // the user input for the menu selection
-        int menuOptionExit = 0;   // a digit number to choose the exit program option
-
 
         /*
          * Loading Process
@@ -63,13 +54,46 @@ public class Main {
 
         Menu.displayTitle();
 
-        do {
-            Menu.displayMenu(menuOptions, menuOptionExit);
-            menuOptionInput = Menu.getMenuSelect(menuOptions, menuOptionExit);
+        int menuOptionInput = -1;   // the user input for the menu selection
 
-            switch (menuOptionInput) {
+        do {
+
+            Menu.displayMenu(menuOptions);
+            menuOptionInput = Menu.getMenuSelect(menuOptions);
+
+            switch(menuOptionInput) {
+
+                case 1:
+                    // Record Rent Collection
+                    System.out.println("1");
+                    break;
+
+                case 2:
+                    // Record Expense
+                    System.out.println("2");
+                    break;
+
+                case 3:
+                    // Portfolio Report
+                    System.out.println("3");
+                    break;
+
+                case 4:
+                    // Save
+                    System.out.println("4");
+                    break;
+
+                case 0:
+                    // Exit the Program
+                    System.out.println("Good Bye.");
+                    break;
+
+                default: // no case match
+                    System.out.println("Please select a option below with a single digit number.");
+                    break;
             }
 
-        } while (menuOptionInput != 0);
+
+        } while (menuOptionInput != menuOptionExit);
     }
 }
