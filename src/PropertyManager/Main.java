@@ -28,8 +28,6 @@ public class Main {
     private static String[] menuOptions = EnvManager.getMenuOptions(); // array of menu options
     private static int menuOptionExit = EnvManager.getMenuOptionExit(); // digit of exit option
 
-    static boolean isSaved = true;
-
 
     public static void main(String[] args) {
 
@@ -37,8 +35,10 @@ public class Main {
          * Loading Process
          */
         clients = DatabaseUtility.loadingClients(clients, kb);
-        if(clients.size() != 0) // skip the next step if the previous loading is failed
+        if(clients.size() != 0) { // skip the next step if the previous loading is failed
+            HashMapContainer.buildClientsHashMap(clients);
             properties = DatabaseUtility.loadingProperties(properties, kb);
+        }
         if(properties.size() != 0)
             expenses = DatabaseUtility.loadingExpenses(expenses, kb);
         if(expenses.size() != 0)
