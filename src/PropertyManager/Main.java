@@ -26,7 +26,6 @@ public class Main {
 
     // attributes for the menu selection
     private static String[] menuOptions = EnvManager.getMenuOptions(); // array of menu options
-    private static int menuOptionMin = EnvManager.getMenuOptionMin(); // min digit of menu list
     private static int menuOptionExit = EnvManager.getMenuOptionExit(); // digit of exit option
 
     static boolean isSaved = true;
@@ -37,13 +36,13 @@ public class Main {
         /*
          * Loading Process
          */
-        clients = DatabaseUtility.loadingClients(clients, fileClients);
-        if (clients.size() != 0) // skip the next step if the previous loading is failed
-            properties = DatabaseUtility.loadingProperties(properties, fileProperties);
-        if (properties.size() != 0)
-            expenses = DatabaseUtility.loadingExpenses(expenses, fileExpenses);
-        if (expenses.size() != 0)
-            rents = DatabaseUtility.loadingRents(rents, fileRents);
+        clients = DatabaseUtility.loadingClients(clients, fileClients, kb);
+        if(clients.size() != 0) // skip the next step if the previous loading is failed
+            properties = DatabaseUtility.loadingProperties(properties, fileProperties, kb);
+        if(properties.size() != 0)
+            expenses = DatabaseUtility.loadingExpenses(expenses, fileExpenses, kb);
+        if(expenses.size() != 0)
+            rents = DatabaseUtility.loadingRents(rents, fileRents, kb);
 
         // loading failed: terminate the program
         if (rents.size() == 0) {
@@ -59,7 +58,7 @@ public class Main {
         do {
 
             Menu.displayMenu(menuOptions);
-            menuOptionInput = Menu.getMenuSelect(menuOptions);
+            menuOptionInput = Menu.getMenuSelect(menuOptions, kb);
 
             switch(menuOptionInput) {
 

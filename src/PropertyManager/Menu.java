@@ -42,9 +42,10 @@ public class Menu {
      * Obtains and validates digit option selections
      *
      * @param menu - an array representation of menu options
+     * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the users selection from the available options
      */
-    public static int getMenuSelect(String[] menu) {
+    public static int getMenuSelect(String[] menu, Scanner kb) {
 
         int option = optionMin; // the user input for the menu selection
         int optionMax = menu.length + optionMin - 2; // a maximum digit number of the option list
