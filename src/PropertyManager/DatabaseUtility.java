@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 public class DatabaseUtility {
 
-    // Scanner object for the keyboard input
-    static Scanner kb = new Scanner(System.in);
-
-
     /**
      * Read the data from the source file and instantiate a new Client object.
      * The data fields of the new object will be setted with next dataset from the Scanner parameter.
@@ -107,9 +103,10 @@ public class DatabaseUtility {
      *
      * @param clients - the arraylist the clients records to be stored
      * @param fileName - the name of the source file containing the records of clients
+     * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Clients
      */
-    public static ArrayList<Client> loadingClients(ArrayList<Client> clients, String fileName) {
+    public static ArrayList<Client> loadingClients(ArrayList<Client> clients, String fileName, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -152,9 +149,10 @@ public class DatabaseUtility {
      *
      * @param properties - the arraylist the properties records to be stored
      * @param fileName - the name of the source file containing the records of properties
+     * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Properties
      */
-    public static ArrayList<Property> loadingProperties(ArrayList<Property> properties, String fileName) {
+    public static ArrayList<Property> loadingProperties(ArrayList<Property> properties, String fileName, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -197,9 +195,10 @@ public class DatabaseUtility {
      *
      * @param expenses - the arraylist the expenses records to be stored
      * @param fileName - the name of the source file containing the records of expenses
+     * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Expenses
      */
-    public static ArrayList<Expense> loadingExpenses(ArrayList<Expense> expenses, String fileName) {
+    public static ArrayList<Expense> loadingExpenses(ArrayList<Expense> expenses, String fileName, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -242,9 +241,10 @@ public class DatabaseUtility {
      *
      * @param rents - the arraylist the rents records to be stored
      * @param fileName - the name of the source file containing the records of rents
+     * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Rents
      */
-    public static ArrayList<Rent> loadingRents(ArrayList<Rent> rents, String fileName) {
+    public static ArrayList<Rent> loadingRents(ArrayList<Rent> rents, String fileName, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
