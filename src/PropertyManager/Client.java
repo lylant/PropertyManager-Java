@@ -1,5 +1,7 @@
 package PropertyManager;
 
+// This class represents an individual client.
+
 public class Client {
 
     // DATA FIELDS

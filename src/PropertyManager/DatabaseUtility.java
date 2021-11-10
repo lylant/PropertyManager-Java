@@ -5,7 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * This class provides some functionalities related to the interaction with the database. In the project,
+ * the database consists of four files: clients.txt, expenses.txt, properties.txt, and rents.txt. Any
+ * method to read/write the database file should be contained this class.
+ */
+
 public class DatabaseUtility {
+
+    // default source file names to be read
+    private static String fileClients = EnvManager.getFileClients();
+    private static String fileProperties = EnvManager.getFileProperties();
+    private static String fileExpenses = EnvManager.getFileExpenses();
+    private static String fileRents = EnvManager.getFileRents();
 
     /**
      * Read the data from the source file and instantiate a new Client object.
@@ -102,18 +114,17 @@ public class DatabaseUtility {
      * Each Client object in the arraylist represents an individual client.
      *
      * @param clients - the arraylist the clients records to be stored
-     * @param fileName - the name of the source file containing the records of clients
      * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Clients
      */
-    public static ArrayList<Client> loadingClients(ArrayList<Client> clients, String fileName, Scanner kb) {
+    public static ArrayList<Client> loadingClients(ArrayList<Client> clients, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
         // read the clients file and instantiate Scanner objects
-        while(!fileName.equals("exit")) {
+        while(!fileClients.equals("exit")) {
             try {
-                File sourceFile = new File(fileName);
+                File sourceFile = new File(fileClients);
                 inputFile = new Scanner(sourceFile);
                 break; // successfully read
 
@@ -122,12 +133,12 @@ public class DatabaseUtility {
                 System.out.println("\nEnter the name of the file that is to be read."
                         + " Type \"exit\" to exit.");
                 System.out.print("File Name?: ");
-                fileName = kb.nextLine(); // get a new file name to be read
+                fileClients = kb.nextLine(); // get a new file name to be read
             }
         }
 
         // terminate the method if the user entered "exit"
-        if(fileName.equals("exit"))
+        if(fileClients.equals("exit"))
             return clients;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
@@ -148,18 +159,17 @@ public class DatabaseUtility {
      * Each Property object in the arraylist represents an individual property.
      *
      * @param properties - the arraylist the properties records to be stored
-     * @param fileName - the name of the source file containing the records of properties
      * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Properties
      */
-    public static ArrayList<Property> loadingProperties(ArrayList<Property> properties, String fileName, Scanner kb) {
+    public static ArrayList<Property> loadingProperties(ArrayList<Property> properties, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
         // read the properties file and instantiate Scanner objects
-        while(!fileName.equals("exit")) {
+        while(!fileProperties.equals("exit")) {
             try {
-                File sourceFile = new File(fileName);
+                File sourceFile = new File(fileProperties);
                 inputFile = new Scanner(sourceFile);
                 break; // successfully read
 
@@ -168,12 +178,12 @@ public class DatabaseUtility {
                 System.out.println("\nEnter the name of the file that is to be read."
                         + " Type \"exit\" to exit.");
                 System.out.print("File Name?: ");
-                fileName = kb.nextLine(); // get a new file name to be read
+                fileProperties = kb.nextLine(); // get a new file name to be read
             }
         }
 
         // terminate the method if the user entered "exit"
-        if(fileName.equals("exit"))
+        if(fileProperties.equals("exit"))
             return properties;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
@@ -194,18 +204,17 @@ public class DatabaseUtility {
      * Each Expense object in the arraylist represents an individual expense.
      *
      * @param expenses - the arraylist the expenses records to be stored
-     * @param fileName - the name of the source file containing the records of expenses
      * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Expenses
      */
-    public static ArrayList<Expense> loadingExpenses(ArrayList<Expense> expenses, String fileName, Scanner kb) {
+    public static ArrayList<Expense> loadingExpenses(ArrayList<Expense> expenses, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
         // read the expenses file and instantiate Scanner objects
-        while(!fileName.equals("exit")) {
+        while(!fileExpenses.equals("exit")) {
             try {
-                File sourceFile = new File(fileName);
+                File sourceFile = new File(fileExpenses);
                 inputFile = new Scanner(sourceFile);
                 break; // successfully read
 
@@ -214,12 +223,12 @@ public class DatabaseUtility {
                 System.out.println("\nEnter the name of the file that is to be read."
                         + " Type \"exit\" to exit.");
                 System.out.print("File Name?: ");
-                fileName = kb.nextLine(); // get a new file name to be read
+                fileExpenses = kb.nextLine(); // get a new file name to be read
             }
         }
 
         // terminate the method if the user entered "exit"
-        if(fileName.equals("exit"))
+        if(fileExpenses.equals("exit"))
             return expenses;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
@@ -240,18 +249,17 @@ public class DatabaseUtility {
      * Each Rent object in the arraylist represents an individual rent collection event.
      *
      * @param rents - the arraylist the rents records to be stored
-     * @param fileName - the name of the source file containing the records of rents
      * @param kb - a Scanner instance to get a keyboard input from the user
      * @return the loaded arraylist of Rents
      */
-    public static ArrayList<Rent> loadingRents(ArrayList<Rent> rents, String fileName, Scanner kb) {
+    public static ArrayList<Rent> loadingRents(ArrayList<Rent> rents, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
         // read the rents file and instantiate Scanner objects
-        while(!fileName.equals("exit")) {
+        while(!fileRents.equals("exit")) {
             try {
-                File sourceFile = new File(fileName);
+                File sourceFile = new File(fileRents);
                 inputFile = new Scanner(sourceFile);
                 break; // successfully read
 
@@ -260,12 +268,12 @@ public class DatabaseUtility {
                 System.out.println("\nEnter the name of the file that is to be read."
                         + " Type \"exit\" to exit.");
                 System.out.print("File Name?: ");
-                fileName = kb.nextLine(); // get a new file name to be read
+                fileRents = kb.nextLine(); // get a new file name to be read
             }
         }
 
         // terminate the method if the user entered "exit"
-        if(fileName.equals("exit"))
+        if(fileRents.equals("exit"))
             return rents;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"

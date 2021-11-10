@@ -1,5 +1,7 @@
 package PropertyManager;
 
+// This class represents an individual property.
+
 public class Property {
 
     // DATA FIELDS

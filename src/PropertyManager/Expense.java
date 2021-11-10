@@ -1,5 +1,7 @@
 package PropertyManager;
 
+// This class represents a single expense event.
+
 public class Expense {
 
     // DATA FIELDS
