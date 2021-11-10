@@ -51,14 +51,14 @@ public class Main {
         }
 
 
-        Menu.displayTitle();
+        MenuUtility.displayTitle();
 
         int menuOptionInput = -1;   // the user input for the menu selection
 
         do {
 
-            Menu.displayMenu(menuOptions);
-            menuOptionInput = Menu.getMenuSelect(menuOptions, kb);
+            MenuUtility.displayMenu(menuOptions);
+            menuOptionInput = MenuUtility.getMenuSelect(menuOptions, kb);
 
             switch(menuOptionInput) {
 

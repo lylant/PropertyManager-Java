@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 // This class provides a menu functionality.
 
-public class Menu {
+public class MenuUtility {
 
     // Scanner object for the keyboard input
     private static Scanner kb = new Scanner(System.in);
