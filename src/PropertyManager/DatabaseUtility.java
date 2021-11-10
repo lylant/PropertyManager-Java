@@ -7,6 +7,12 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/*
+ * This class provides some functionalities related to the interaction with the database. In the project,
+ * the database consists of four files: clients.txt, expenses.txt, properties.txt, and rents.txt. Any
+ * method to read/write the database file should be contained this class.
+ */
+
 public class DatabaseUtility {
 
     /**

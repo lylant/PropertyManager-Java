@@ -3,6 +3,8 @@ package PropertyManager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// This class provides a menu functionality.
+
 public class Menu {
 
     // Scanner object for the keyboard input

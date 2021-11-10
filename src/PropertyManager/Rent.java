@@ -1,5 +1,7 @@
 package PropertyManager;
 
+// This class represents a single rent collection event.
+
 public class Rent {
 
     // DATA FIELDS

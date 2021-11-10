@@ -1,5 +1,6 @@
 package PropertyManager;
 
+// This class represents a single address for Client or Property.
 // This class will be aggregated in Client and Property.
 public class Address {
 
