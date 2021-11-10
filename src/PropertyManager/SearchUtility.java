@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Search {
+public class SearchUtility {
     /**
      * Search the clients that their name is containing specific search keyword.
      * The search would return all and any clients whose name included the search keyword.
