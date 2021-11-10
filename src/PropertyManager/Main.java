@@ -36,13 +36,13 @@ public class Main {
         /*
          * Loading Process
          */
-        clients = DatabaseUtility.loadingClients(clients, fileClients, kb);
+        clients = DatabaseUtility.loadingClients(clients, kb);
         if(clients.size() != 0) // skip the next step if the previous loading is failed
-            properties = DatabaseUtility.loadingProperties(properties, fileProperties, kb);
+            properties = DatabaseUtility.loadingProperties(properties, kb);
         if(properties.size() != 0)
-            expenses = DatabaseUtility.loadingExpenses(expenses, fileExpenses, kb);
+            expenses = DatabaseUtility.loadingExpenses(expenses, kb);
         if(expenses.size() != 0)
-            rents = DatabaseUtility.loadingRents(rents, fileRents, kb);
+            rents = DatabaseUtility.loadingRents(rents, kb);
 
         // loading failed: terminate the program
         if (rents.size() == 0) {
