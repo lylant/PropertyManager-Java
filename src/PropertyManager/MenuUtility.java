@@ -26,6 +26,15 @@ public class MenuUtility {
 
 
     /**
+     * Display the menu artwork for: Record Rent Collection
+     */
+    public static void displayRecordRent() {
+        System.out.println();
+        System.out.println("    +++ Recording Rent Collection +++");
+    }
+
+
+    /**
      * Display the available menu options to the console from the menu parameter.
      * The last item of the parameter should be "Exit the Program" option.
      *
@@ -48,13 +57,12 @@ public class MenuUtility {
      * @return the users selection from the available options
      */
     public static int getMenuSelect(String[] menu, Scanner kb) {
-
+        boolean invalidOption = false; // flag variable for the validity of selection
         int option = optionMin; // the user input for the menu selection
         int optionMax = menu.length + optionMin - 2; // a maximum digit number of the option list
 
         do {
-            // invalid input, print the error message
-            if (option < optionMin || option > optionMax)
+            if (invalidOption) // invalid input, print the error message
                 System.out.println("\n[!] Invalid option. Please select a option with a digit number.");
             System.out.print("\nEnter the option: ");
 
@@ -65,7 +73,9 @@ public class MenuUtility {
                 option = -1; // replace the option variable with no case match value
                 kb.nextLine(); // consume "\n"
             }
-        } while ((option < optionMin || option > optionMax) && option != optionExit);
+
+            invalidOption = true; // flag the invalidity for the next loop
+        } while (!Validator.validateSelectMenu(option, optionMin, optionMax) && option != optionExit);
 
         // received the valid selection, convert to numbers as 1, 2, 3... to fit the switch statement
         // do not convert if the input is match as exiting the program
