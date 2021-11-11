@@ -22,6 +22,19 @@ public class Rent {
         date = "2000-01-01";
     }
 
+    /**
+     * Constructor
+     *
+     * @param ID - the ID of the property for which the rent was collected
+     * @param rent - the monetary amount of rent collected
+     * @param date - the date on which the rent was collected
+     */
+    public Rent(int ID, double rent, String date) {
+        propertyID = ID;
+        rentAmount = rent;
+        this.date = date;
+    }
+
 
     /**
      * @return the ID of the property for which the rent was collected
