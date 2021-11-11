@@ -6,6 +6,8 @@ package PropertyManager;
  * not be used further process of the program.
  */
 
+import java.time.format.DateTimeFormatter;
+
 public class EnvManager {
 
     // default source file names to be read
@@ -23,6 +25,9 @@ public class EnvManager {
 
     private static int menuOptionMin = 1;  // a minimum digit number of the option list
     private static int menuOptionExit = 0; // a digit number to choose the exit program option
+
+    // DateTimeFormatter for this program
+    private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
     public static String getFileClients() {
@@ -51,5 +56,9 @@ public class EnvManager {
 
     public static int getMenuOptionExit() {
         return menuOptionExit;
+    }
+
+    public static DateTimeFormatter getDateTimeFormatter() {
+        return dateFormat;
     }
 }
