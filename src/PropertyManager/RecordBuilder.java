@@ -15,7 +15,7 @@ public class RecordBuilder {
         // display the menu welcome message
         MenuUtility.displayRecordRent();
 
-        // Search the property
+        // search the property
         System.out.println("\nYou need to choose a specific property to add a new rent collection record.");
         System.out.println("You can find the property by searching the address of the property.");
         searchResults = SearchUtility.searchPropertiesByAddress(properties, kb);
@@ -23,13 +23,13 @@ public class RecordBuilder {
         if (searchResults.size() > 1) { // the search found 2+ properties, allow the user to select one
             propertyID = SearchUtility.selectPropertyFromSearch(searchResults, kb);
         }
+        else { // the search found only one property, select the property automatically
+            propertyID = searchResults.get(0).getID();
+        }
 
-        System.out.println(propertyID);
+        // display the detail of property
+        ViewUtility.displayPropertyDetail(propertyID);
 
-        //else { // the search found only one property, select the property automatically
-        //propertyID = searchResults.get(0).getID();
-        //}
-        
         return rents;
     }
 }

@@ -1,8 +1,13 @@
 package PropertyManager;
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
+
 // This class represents an individual property.
 
 public class Property {
+
+    private static DecimalFormat df = new DecimalFormat("0.00"); // decimal format for the monetary
 
     // DATA FIELDS
     private int ID;                   // a unique numeric identifier for a property
@@ -39,6 +44,21 @@ public class Property {
     }
 
 
+    /**
+     * @return the summary details of the property
+     */
+    public String toString() {
+        // the hashmap of clients to convert clientID to their name
+        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
+
+        String toStr = "ID:\t " +  ID
+                + "\nAddress: " + address
+                + "\nOwner:\t " + clientsHashMap.get(clientID).getFullName()
+                + "\nRent:\t $ " + df.format(rentWeekly) + " /week";
+        return toStr;
+    }
+    
+    
     /**
      * @return the unique numeric identifier for a property
      */
