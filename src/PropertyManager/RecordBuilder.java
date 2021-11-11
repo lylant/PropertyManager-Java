@@ -11,6 +11,7 @@ public class RecordBuilder {
         // initialize local variables:
         ArrayList<Property> searchResults = null; // the arraylist to store the search results
         int propertyID = -1; // the propertyID of the property the rent collection to be added
+        String searchConfirm = "N";
 
         // display the menu welcome message
         MenuUtility.displayRecordRent();
@@ -29,6 +30,19 @@ public class RecordBuilder {
 
         // display the detail of property
         ViewUtility.displayPropertyDetail(propertyID);
+
+        // confirm the selection
+        System.out.println("\nAre you sure to add a record of rent collection to this property?");
+        do {
+            if (!Validator.validateYesOrNo(searchConfirm)) // invalid input, print the error message
+                System.out.println("\n[!] Invalid input. Please answer with Y/N.");
+            System.out.print("\nEnter Y/N: ");
+
+            searchConfirm = kb.nextLine();
+
+            if (searchConfirm.equalsIgnoreCase("N")) // "N": return to main menu
+                return rents;
+        } while (!searchConfirm.equalsIgnoreCase("Y"));
 
         return rents;
     }
