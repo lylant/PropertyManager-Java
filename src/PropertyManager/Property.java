@@ -25,6 +25,19 @@ public class Property {
         clientID = -1;
     }
 
+    /**
+     * Constructor
+     *
+     * @param ID - the unique numeric identifier for a property
+     */
+    public Property(int ID) {
+        this.ID = ID;
+        address = new Address("N/A", "N/A", "N/A", "0000");
+        rentWeekly = -1;
+        managementRate = -1;
+        clientID = -1;
+    }
+
 
     /**
      * @return the unique numeric identifier for a property
