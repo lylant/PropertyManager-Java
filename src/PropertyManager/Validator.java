@@ -48,4 +48,15 @@ public class Validator {
 
         return (index >= 0) ? true : false;
     }
+
+
+    /**
+     * Validate Y/N input. Returns true if the input is one of "Y", "y", "N", "n".
+     *
+     * @param input - the user input for Y/N question
+     * @return the validity
+     */
+    public static boolean validateYesOrNo(String input) {
+        return (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("N")) ? true : false;
+    }
 }
