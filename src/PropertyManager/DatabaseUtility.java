@@ -19,6 +19,25 @@ public class DatabaseUtility {
     private static String fileExpenses = EnvManager.getFileExpenses();
     private static String fileRents = EnvManager.getFileRents();
 
+    // flag to check whether if the record is saved or not
+    private static boolean isSaved = true;
+
+
+    /**
+     * @return true if there is no unsaved data, false if there is unsaved data
+     */
+    public static boolean getIsSaved() {
+        return isSaved;
+    }
+
+    /**
+     * @param save - the flag of isSaved status: [true]: no unsaved changes, [false]: change unsaved.
+     */
+    public static void setIsSaved(boolean save) {
+        isSaved = save;
+    }
+
+
     /**
      * Read the data from the source file and instantiate a new Client object.
      * The data fields of the new object will be setted with next dataset from the Scanner parameter.

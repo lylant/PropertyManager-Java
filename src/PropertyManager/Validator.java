@@ -59,4 +59,15 @@ public class Validator {
     public static boolean validateYesOrNo(String input) {
         return (input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("N")) ? true : false;
     }
+
+
+    /**
+     * Validate the number of weeks rent was collected. Valid if the input is positive.
+     *
+     * @param weeks - the number of weeks to be validated
+     * @return the validity
+     */
+    public static boolean validateWeeks(int weeks) {
+        return (weeks > 0) ? true : false;
+    }
 }
