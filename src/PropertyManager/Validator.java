@@ -9,7 +9,20 @@ import java.util.Comparator;
  */
 
 public class Validator {
-    
+
+    /**
+     * Validate the menu selection.
+     *
+     * @param option - the user input for the menu selection
+     * @param optionMin - a minimum digit number of the option list
+     * @param optionMax - a maximum digit number of the option list
+     * @return the validity
+     */
+    public static boolean validateSelectMenu(int option, int optionMin, int optionMax) {
+        return (option < optionMin || option > optionMax) ? false : true;
+    }
+
+
     /**
      * Determine whether if the input selection exists on the search result list or not. Returns true
      * if there is a match case in the arraylist. The arraylist should be sorted by ID before the validation.
