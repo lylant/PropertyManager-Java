@@ -11,7 +11,8 @@ public class HashMapContainer {
 
     // HASH MAPS
     private static HashMap<Integer, Client> clientsHashMap = new HashMap<Integer, Client>();
-
+    private static HashMap<Integer, Property> propertiesHashMap = new HashMap<Integer, Property>();
+    
 
     /**
      * Build a hashmap for the clients. ClientID and Client instance will be the Key and value pair.
@@ -24,11 +25,28 @@ public class HashMapContainer {
         }
     }
 
+    /**
+     * Build a hashmap for the properties. PropertyID and Property instance will be the Key and value pair.
+     *
+     * @param properties - the arraylist of all properties
+     */
+    public static void buildPropertiesHashMap(ArrayList<Property> properties) {
+        for (int i = 0; i < properties.size(); i++) {
+            propertiesHashMap.put(properties.get(i).getID(), properties.get(i));
+        }
+    }
 
     /**
      * @return the hashmap for the clients
      */
     public static HashMap<Integer, Client> getClientsHashMap() {
         return clientsHashMap;
+    }
+
+    /**
+     * @return the hashmap for the properties
+     */
+    public static HashMap<Integer, Property> getPropertiesHashMap() {
+        return propertiesHashMap;
     }
 }
