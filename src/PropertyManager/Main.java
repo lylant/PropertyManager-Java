@@ -39,8 +39,10 @@ public class Main {
             HashMapContainer.buildClientsHashMap(clients);
             properties = DatabaseUtility.loadingProperties(properties, kb);
         }
-        if(properties.size() != 0)
+        if(properties.size() != 0) {
+            HashMapContainer.buildPropertiesHashMap(properties);
             expenses = DatabaseUtility.loadingExpenses(expenses, kb);
+        }
         if(expenses.size() != 0)
             rents = DatabaseUtility.loadingRents(rents, kb);
 
