@@ -43,7 +43,7 @@ public class RecordBuilder {
 
         
         // display the detail of property
-        ViewUtility.displayPropertyDetail(propertyID);
+        ViewUtility.displayPropertyDetail(propertiesHashMap.get(propertyID));
 
         
         // confirm the selection
@@ -87,7 +87,14 @@ public class RecordBuilder {
         // add the record of new Rent collection to the arraylist of Rents
         rents.add(newRent);
         DatabaseUtility.setIsSaved(false); // flag the change occurs
-        
+
+
+        // display the transaction report
+        ViewUtility.displayRentDetail(newRent);
+        System.out.print("\n (Press ENTER key to return to main menu)");
+        kb.nextLine();
+
+
         return rents;
     }
 }
