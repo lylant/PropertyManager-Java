@@ -1,15 +1,15 @@
 package PropertyManager;
 
-/*
- * This class provides a search functionality.
- */
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+/*
+ * This class provides a search functionality.
+ */
 
 public class SearchUtility {
     /**
@@ -63,7 +63,7 @@ public class SearchUtility {
                 .collect(Collectors.toList()));
 
         // sort the search result by their IDs
-        searchResults = SortUtility.sortPropertyByID(searchResults);
+        SortUtility.sortPropertyByID(searchResults);
 
         return searchResults;
     }

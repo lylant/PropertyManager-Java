@@ -17,13 +17,13 @@ public class SortUtility {
      * @param properties - the arraylist of Properties to be sorted
      * @return the sorted arraylist of Properties
      */
-    public static ArrayList<Property> sortPropertyByID(ArrayList<Property> properties) {
+    public static void sortPropertyByID(ArrayList<Property> properties) {
         Collections.sort(properties, new Comparator<Property>() {
             @Override
             public int compare(Property a, Property b) {
                 return Integer.compare(a.getID(), b.getID());
             }
         });
-        return properties;
+        return;
     }
 }

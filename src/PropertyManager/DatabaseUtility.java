@@ -134,9 +134,8 @@ public class DatabaseUtility {
      *
      * @param clients - the arraylist the clients records to be stored
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the loaded arraylist of Clients
      */
-    public static ArrayList<Client> loadingClients(ArrayList<Client> clients, Scanner kb) {
+    public static void loadingClients(ArrayList<Client> clients, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -158,7 +157,7 @@ public class DatabaseUtility {
 
         // terminate the method if the user entered "exit"
         if(fileClients.equals("exit"))
-            return clients;
+            return;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
@@ -168,8 +167,8 @@ public class DatabaseUtility {
             clients.add(readClient(inputFile));
         }
 
-        // successfully loading completed, return the reference of ArrayList<Client>
-        return clients;
+        // successfully loading completed
+        return;
     }
 
 
@@ -179,9 +178,8 @@ public class DatabaseUtility {
      *
      * @param properties - the arraylist the properties records to be stored
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the loaded arraylist of Properties
      */
-    public static ArrayList<Property> loadingProperties(ArrayList<Property> properties, Scanner kb) {
+    public static void loadingProperties(ArrayList<Property> properties, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -203,7 +201,7 @@ public class DatabaseUtility {
 
         // terminate the method if the user entered "exit"
         if(fileProperties.equals("exit"))
-            return properties;
+            return;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
@@ -213,8 +211,8 @@ public class DatabaseUtility {
             properties.add(readProperty(inputFile));
         }
 
-        // successfully loading completed, return the reference of ArrayList<Property>
-        return properties;
+        // successfully loading completed
+        return;
     }
 
 
@@ -224,9 +222,8 @@ public class DatabaseUtility {
      *
      * @param expenses - the arraylist the expenses records to be stored
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the loaded arraylist of Expenses
      */
-    public static ArrayList<Expense> loadingExpenses(ArrayList<Expense> expenses, Scanner kb) {
+    public static void loadingExpenses(ArrayList<Expense> expenses, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -248,7 +245,7 @@ public class DatabaseUtility {
 
         // terminate the method if the user entered "exit"
         if(fileExpenses.equals("exit"))
-            return expenses;
+            return;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
@@ -258,8 +255,8 @@ public class DatabaseUtility {
             expenses.add(readExpense(inputFile));
         }
 
-        // successfully loading completed, return the reference of ArrayList<Expense>
-        return expenses;
+        // successfully loading completed
+        return;
     }
 
 
@@ -269,9 +266,8 @@ public class DatabaseUtility {
      *
      * @param rents - the arraylist the rents records to be stored
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the loaded arraylist of Rents
      */
-    public static ArrayList<Rent> loadingRents(ArrayList<Rent> rents, Scanner kb) {
+    public static void loadingRents(ArrayList<Rent> rents, Scanner kb) {
         // initialize a reference variable for Scanner object
         Scanner inputFile = null;
 
@@ -293,7 +289,7 @@ public class DatabaseUtility {
 
         // terminate the method if the user entered "exit"
         if(fileRents.equals("exit"))
-            return rents;
+            return;
 
         // set delimiters for the Scanner objects as ",", "\n", and "\r\n"
         inputFile.useDelimiter(",|\n|\r\n");
@@ -303,7 +299,7 @@ public class DatabaseUtility {
             rents.add(readRent(inputFile));
         }
 
-        // successfully loading completed, return the reference of ArrayList<Rent>
-        return rents;
+        // successfully loading completed
+        return;
     }
 }
