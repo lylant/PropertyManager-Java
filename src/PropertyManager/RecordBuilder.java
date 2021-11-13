@@ -22,15 +22,21 @@ public class RecordBuilder {
     public static ArrayList<Rent> recordRent
             (ArrayList<Property> properties, ArrayList<Rent> rents, Scanner kb) {
 
-        // initialize local variables:
-
-        // the hashmap of clients to convert clientID to their name
+        /*
+         *  initialize local variables:
+         */
+        // the hashmap for properties, for getting a specific Property instance from its ID
         HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
-        ArrayList<Property> searchResults = null; // the arraylist to store the search results
-        int propertyID = -1; // the propertyID of the property the rent collection to be added
-        String searchConfirm = "N"; // the user input to confirm the selecting the property
+        // the arraylist to store the search results
+        ArrayList<Property> searchResults = null;
+        // the propertyID of the property the rent collection to be added
+        int propertyID = -1;
+        // the user input to confirm the selecting the property
+        String searchConfirm = "N";
+        // number of weeks
         int weeks = -1; // the user input for the number of weeks the rent was collected
         boolean invalidWeeks = false; // the flag variable for the validity of weeks
+        // current date
         DateTimeFormatter dateFormat = EnvManager.getDateTimeFormatter(); // date format
         String date = LocalDate.now().format(dateFormat); // String containing of the current date
 
@@ -106,5 +112,35 @@ public class RecordBuilder {
 
 
         return rents;
+    }
+
+
+    public static ArrayList<Expense> recordExpense
+            (ArrayList<Property> properties, ArrayList<Expense> expenses, Scanner kb) {
+
+        /*
+         *  initialize local variables:
+         */
+        // the hashmap for properties, for getting a specific Property instance from its ID
+        HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
+        // the arraylist to store the search results 
+        ArrayList<Property> searchResults = null;
+        // the propertyID of the property the rent collection to be added
+        int propertyID = -1;
+        // the user input to confirm the selecting the property
+        String searchConfirm = "N";
+        // number of weeks
+        //int weeks = -1; // the user input for the number of weeks the rent was collected
+        //boolean invalidWeeks = false; // the flag variable for the validity of weeks
+        // current date
+        DateTimeFormatter dateFormat = EnvManager.getDateTimeFormatter(); // date format
+        String date = LocalDate.now().format(dateFormat); // String containing of the current date
+
+
+        // display the menu welcome message
+        MenuUtility.displayRecordExpense();
+
+
+        return expenses;
     }
 }
