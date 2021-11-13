@@ -30,7 +30,16 @@ public class MenuUtility {
      */
     public static void displayRecordRent() {
         System.out.println();
-        System.out.println("    +++ Recording Rent Collection +++");
+        System.out.println("    +++ Recording a New Rent Collection +++");
+    }
+
+
+    /**
+     * Display the menu artwork for: Record Expense
+     */
+    public static void displayRecordExpense() {
+        System.out.println();
+        System.out.println("    +++ Recording a New Expense Event +++");
     }
 
 
