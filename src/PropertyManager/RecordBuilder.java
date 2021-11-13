@@ -9,6 +9,16 @@ import java.util.Scanner;
 
 public class RecordBuilder {
 
+    /**
+     * Add a rent collection record to specific property. The user can find and select the property
+     * by entering the property's address. The user is allowed to enter the number of weeks the rent
+     * was collected, however, the date of the rent collection will be recorded as the current date.
+     *
+     * @param properties - the arraylist of all properties
+     * @param rents - the arraylist of all rents
+     * @param kb - the Scanner instance to get a user input via a keyboard
+     * @return the updated arraylist of all rents
+     */
     public static ArrayList<Rent> recordRent
             (ArrayList<Property> properties, ArrayList<Rent> rents, Scanner kb) {
 
