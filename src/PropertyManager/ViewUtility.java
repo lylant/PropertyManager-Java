@@ -13,9 +13,9 @@ public class ViewUtility {
     /**
      * Display the detail of a specific property
      *
-     * @param propertyID - the unique numeric identifier for the property
+     * @param property - the property to be displayed
      */
-    public static void displayPropertyDetail(int propertyID) {
+    public static void displayPropertyDetail(Property property) {
         // the hashmap of clients to convert clientID to their name
         HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
 
@@ -26,9 +26,30 @@ public class ViewUtility {
             System.out.print("-");
         System.out.println();
         // info box body
-        System.out.println(propertiesHashMap.get(propertyID));
+        System.out.println(property);
         // info box border
         for (int i=0; i < 58; i++)
+            System.out.print("-");
+        System.out.println();
+    }
+
+
+    /**
+     * Display the detail of a specific rent collection event
+     *
+     * @param rent - the rent collection event to be displayed
+     */
+    public static void displayRentDetail(Rent rent) {
+        // info box title
+        System.out.println("\n [*] The Summary of the Rent Collection Transaction");
+        // info box border
+        for (int i=0; i < 66; i++)
+            System.out.print("-");
+        System.out.println();
+        // info box body
+        System.out.println(rent);
+        // info box border
+        for (int i=0; i < 66; i++)
             System.out.print("-");
         System.out.println();
     }
