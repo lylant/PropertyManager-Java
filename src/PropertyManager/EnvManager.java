@@ -30,34 +30,58 @@ public class EnvManager {
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
+    /**
+     * @return the default source file name of clients
+     */
     public static String getFileClients() {
         return fileClients;
     }
 
+    /**
+     * @return the default source file name of properties
+     */
     public static String getFileProperties() {
         return fileProperties;
     }
 
+    /**
+     * @return the default source file name of expenses
+     */
     public static String getFileExpenses() {
         return fileExpenses;
     }
 
+    /**
+     * @return the default source file name of rents
+     */
     public static String getFileRents() {
         return fileRents;
     }
 
+    /**
+     * @return the array representation of menu options
+     */
     public static String[] getMenuOptions() {
         return menuOptions;
     }
 
+    /**
+     * @return the minimum digit number of the option list
+     */
     public static int getMenuOptionMin() {
         return menuOptionMin;
     }
 
+    /**
+     * @return the digit number to choose the exit program option
+     */
     public static int getMenuOptionExit() {
         return menuOptionExit;
     }
 
+    /**
+     * @return the DateTimeFormatter for this program
+     */
     public static DateTimeFormatter getDateTimeFormatter() {
         return dateFormat;
     }

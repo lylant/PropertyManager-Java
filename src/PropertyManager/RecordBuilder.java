@@ -15,12 +15,10 @@ public class RecordBuilder {
      * was collected, however, the date of the rent collection will be recorded as the current date.
      *
      * @param properties - the arraylist of all properties
-     * @param rents - the arraylist of all rents
+     * @param rents - the arraylist of all rents to be updated
      * @param kb - the Scanner instance to get a user input via a keyboard
-     * @return the updated arraylist of all rents
      */
-    public static ArrayList<Rent> recordRent
-            (ArrayList<Property> properties, ArrayList<Rent> rents, Scanner kb) {
+    public static void recordRent(ArrayList<Property> properties, ArrayList<Rent> rents, Scanner kb) {
 
         /*
          *  initialize local variables:
@@ -72,7 +70,7 @@ public class RecordBuilder {
             searchConfirm = kb.nextLine();
 
             if (searchConfirm.equalsIgnoreCase("N")) // "N": return to main menu
-                return rents;
+                return;
         } while (!searchConfirm.equalsIgnoreCase("Y"));
 
         
@@ -109,9 +107,7 @@ public class RecordBuilder {
         ViewUtility.displayRentDetail(newRent);
         System.out.print("\n (Press ENTER key to return to main menu)");
         kb.nextLine();
-
-
-        return rents;
+        return;
     }
 
 

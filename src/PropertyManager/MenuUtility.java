@@ -63,7 +63,7 @@ public class MenuUtility {
      *
      * @param menu - an array representation of menu options
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the users selection from the available options
+     * @return the user's menu selection, adjusted to fit the switch statement in the main method
      */
     public static int getMenuSelect(String[] menu, Scanner kb) {
         boolean invalidOption = false; // flag variable for the validity of selection
