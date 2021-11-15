@@ -17,12 +17,18 @@ public class EnvManager {
     private static String fileExpenses = "expenses.txt";
     private static String fileRents = "rents.txt";
 
-    // an array representation of menu options
+    // an array representation of main menu options
     private static String[] menuOptions = {"Record Rent Collection",
             "Record Expense",
             "Generate Portfolio Report",
             "Save Changes",
             "Exit the Program"};
+
+    // an array representation of portfolio menu options
+    private static String[] reportOptions = {"Generate a report for a specific client",
+            "Generate a report for all clients",
+            "Generate a report for a specified postcode",
+            "Exit to Main Menu"};
 
     private static int menuOptionMin = 1;  // a minimum digit number of the option list
     private static int menuOptionExit = 0; // a digit number to choose the exit program option
@@ -63,10 +69,17 @@ public class EnvManager {
     }
 
     /**
-     * @return the array representation of menu options
+     * @return the array representation of main menu options
      */
     public static String[] getMenuOptions() {
         return menuOptions;
+    }
+
+    /**
+     * @return the array representation of portfolio report menu options
+     */
+    public static String[] getReportOptions() {
+        return reportOptions;
     }
 
     /**
