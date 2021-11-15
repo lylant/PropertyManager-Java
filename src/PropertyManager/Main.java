@@ -66,7 +66,7 @@ public class Main {
 
                 case 1:
                     // Record Rent Collection
-                    System.out.println("1");
+                    RecordBuilder.recordRent(properties, rents, kb);
                     break;
 
                 case 2:
