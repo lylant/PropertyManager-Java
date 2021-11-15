@@ -73,8 +73,25 @@ public class Validator {
     }
 
 
+    /**
+     * Validate the description of the expense event. This method would check the String with RegEx.
+     *
+     * @param descr - the description to be validated
+     * @return the validity
+     */
     public static boolean validateDescription(String descr) {
         String regEx = "[a-zA-Z0-9][a-zA-Z0-9\\s-_']{0,19}";
         return (Pattern.matches(regEx, descr));
+    }
+
+
+    /**
+     * Validate the cost of the expense event. Valid if the input is positive.
+     *
+     * @param cost - the cost of the expense event to be validated
+     * @return the validity
+     */
+    public static boolean validateCost(double cost) {
+        return (cost > 0);
     }
 }
