@@ -61,7 +61,7 @@ public class RecordBuilder {
 
         
         // confirm the selection
-        System.out.println("\nAre you sure to add a record of rent collection to this property?");
+        System.out.println("\nAre you sure to add a record of a rent collection to this property?");
         do {
             if (!Validator.validateYesOrNo(searchConfirm)) // invalid input, print the error message
                 System.out.println("\n[!] Invalid input. Please answer with Y/N.");
