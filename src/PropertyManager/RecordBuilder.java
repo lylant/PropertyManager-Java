@@ -111,8 +111,7 @@ public class RecordBuilder {
     }
 
 
-    public static ArrayList<Expense> recordExpense
-            (ArrayList<Property> properties, ArrayList<Expense> expenses, Scanner kb) {
+    public static void recordExpense(ArrayList<Property> properties, ArrayList<Expense> expenses, Scanner kb) {
 
         /*
          *  initialize local variables:
@@ -125,9 +124,9 @@ public class RecordBuilder {
         int propertyID = -1;
         // the user input to confirm the selecting the property
         String searchConfirm = "N";
-        // number of weeks
-        //int weeks = -1; // the user input for the number of weeks the rent was collected
-        //boolean invalidWeeks = false; // the flag variable for the validity of weeks
+        // description of the expense
+        String descr = ""; // the user input for the description of the expense event
+        boolean invalidDescr = false; // the flag variable for the validity of the description
         // current date
         DateTimeFormatter dateFormat = EnvManager.getDateTimeFormatter(); // date format
         String date = LocalDate.now().format(dateFormat); // String containing of the current date
@@ -137,6 +136,42 @@ public class RecordBuilder {
         MenuUtility.displayRecordExpense();
 
 
-        return expenses;
+        // search the property
+        System.out.println("\nYou need to choose a specific property the expense event was incurred.");
+        System.out.println("You can find the property by searching the address of the property.");
+        searchResults = SearchUtility.searchPropertiesByAddress(properties, kb);
+
+
+        // display the detail of property
+        ViewUtility.displayPropertyDetail(propertiesHashMap.get(propertyID));
+
+
+        // confirm the selection
+        System.out.println("\nAre you sure to add a record of an expense event to this property?");
+        do {
+            if (!Validator.validateYesOrNo(searchConfirm)) // invalid input, print the error message
+                System.out.println("\n[!] Invalid input. Please answer with Y/N.");
+
+            searchConfirm = kb.nextLine();
+
+            if (searchConfirm.equalsIgnoreCase("N")) // "N": return to main menu
+                return;
+        } while (!searchConfirm.equalsIgnoreCase("Y"));
+
+
+        // ask the user how many weeks
+        System.out.println("\nEnter a simple description of the incurred expense event (e.g. \"fix leaking tap\").");
+        do {
+            if (invalidDescr) // invalid input, print the error message
+                System.out.println("\n[!] Invalid number of weeks. Please enter a positive integer.");
+            System.out.print("\nEnter the description: ");
+
+            descr = kb.nextLine();
+
+            invalidDescr = true; // flag the invalidity for the next loop
+        } while (!Validator.validateDescription(descr));
+
+
+        return;
     }
 }
