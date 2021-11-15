@@ -3,6 +3,7 @@ package PropertyManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 /*
  * This class provides the validation functionalities for the user input.
@@ -19,7 +20,7 @@ public class Validator {
      * @return the validity
      */
     public static boolean validateSelectMenu(int option, int optionMin, int optionMax) {
-        return (option < optionMin || option > optionMax) ? false : true;
+        return !(option < optionMin || option > optionMax);
     }
 
 
@@ -46,7 +47,7 @@ public class Validator {
                     }
                 });
 
-        return (index >= 0) ? true : false;
+        return (index >= 0);
     }
 
 
@@ -68,6 +69,12 @@ public class Validator {
      * @return the validity
      */
     public static boolean validateWeeks(int weeks) {
-        return (weeks > 0) ? true : false;
+        return (weeks > 0);
+    }
+
+
+    public static boolean validateDescription(String descr) {
+        String regEx = "[a-zA-Z0-9][a-zA-Z0-9\\s-_']{0,19}";
+        return (Pattern.matches(regEx, descr));
     }
 }
