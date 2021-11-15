@@ -1,6 +1,7 @@
 package PropertyManager;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 // This class represents an individual property.
@@ -56,6 +57,68 @@ public class Property {
                 + "\nOwner:\t " + clientsHashMap.get(clientID).getFullName()
                 + "\nRent:\t $ " + df.format(rentWeekly) + " /week";
         return toStr;
+    }
+
+
+    /**
+     * Evaluate the total amount of rent collected in this property.
+     *
+     * @param rents - the arraylist of all rents, must be sorted by propertyID in ascending order
+     * @return the total amount of rent collected
+     */
+    public double getTotalRent(ArrayList<Rent> rents) {
+
+        double sumRents = 0;
+
+        for (int i = 0; i < rents.size(); i++) {
+            if (rents.get(i).getPropertyID() == ID)
+                sumRents += rents.get(i).getRentAmount();
+            else if (rents.get(i).getPropertyID() > ID)
+                break;
+        }
+
+        return sumRents;
+    }
+
+    /**
+     * Evaluate the total amount of cost for all expenses in this property.
+     *
+     * @param expenses - the arraylist of all expenses, must be sorted by propertyID in ascending order
+     * @return the total amount of cost for all expenses
+     */
+    public double getTotalExpenses(ArrayList<Expense> expenses) {
+
+        double sumCosts = 0;
+
+        for (int i = 0; i < expenses.size(); i++) {
+            if (expenses.get(i).getPropertyID() == ID)
+                sumCosts += expenses.get(i).getCost();
+            else if (expenses.get(i).getPropertyID() > ID)
+                break;
+        }
+
+        return sumCosts;
+    }
+
+    /**
+     * Evaluate the total management fee in this property.
+     *
+     * @param rents - the arraylist of all rents, must be sorted by propertyID in ascending order
+     * @return the total amount of cost for management fee
+     */
+    public double getManagementFee(ArrayList<Rent> rents) {
+        return (getTotalRent(rents) * managementRate);
+    }
+
+    /**
+     * Evaluate the net monetary amount of this property.
+     *
+     * @param rents - the arraylist of all rents, must be sorted by propertyID in ascending order
+     * @param expenses - the arraylist of all expenses, must be sorted by propertyID in ascending order
+     * @return the net monetary amount of this property
+     */
+    public double getNetBalance(ArrayList<Rent> rents, ArrayList<Expense> expenses) {
+        return (getTotalRent(rents) - getManagementFee(rents) - getTotalExpenses(expenses));
     }
     
     
