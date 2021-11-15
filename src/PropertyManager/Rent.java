@@ -7,7 +7,8 @@ import java.util.HashMap;
 
 public class Rent {
 
-    private static DecimalFormat df = new DecimalFormat("0.00"); // decimal format for the monetary
+    // decimal format for the monetary value;
+    private static DecimalFormat df = EnvManager.getDecimalFormat();
     
     // DATA FIELDS
     private int propertyID;    // the ID of the property for which the rent was collected

@@ -71,7 +71,7 @@ public class Main {
 
                 case 2:
                     // Record Expense
-                    System.out.println("2");
+                    RecordBuilder.recordExpense(properties, expenses, kb);
                     break;
 
                 case 3:

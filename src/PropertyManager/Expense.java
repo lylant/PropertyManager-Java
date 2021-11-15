@@ -2,7 +2,14 @@ package PropertyManager;
 
 // This class represents a single expense event.
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
+
 public class Expense {
+
+    // decimal format for the monetary value;
+    private static DecimalFormat df = EnvManager.getDecimalFormat();
+
 
     // DATA FIELDS
     private int propertyID;       // the ID of the property for which the expense was incurred
@@ -24,6 +31,39 @@ public class Expense {
         date = "2000-01-01";
     }
 
+    /**
+     * Constructor
+     *
+     * @param ID - the ID of the property for which the expense was incurred
+     * @param descr - the description of the expense
+     * @param cost - the cost of the expense
+     * @param date - the date on which the expense was incurred
+     */
+    public Expense(int ID, String descr, double cost, String date) {
+        propertyID = ID;
+        description = descr;
+        this.cost = cost;
+        this.date = date;
+    }
+
+
+    /**
+     * @return the summary details of the expense event
+     */
+    public String toString() {
+        // the hashmaps to convert foreign IDs to meaningful information
+        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
+        HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
+
+        String toStr = "Property Address:    " + propertiesHashMap.get(propertyID).getAddress()
+                + "\nProperty Owner:\t     "
+                + clientsHashMap.get(propertiesHashMap.get(propertyID).getClientID()).getFullName()
+                + "\nExpense Description: " + description
+                + "\nMonetary Amount:     $ " + df.format(cost)
+                + "\nCurrent Date:\t     " + date;
+        return toStr;
+    }
+    
 
     /**
      * @return the ID of the property for which the expense was incurred

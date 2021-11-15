@@ -127,6 +127,9 @@ public class RecordBuilder {
         // description of the expense
         String descr = ""; // the user input for the description of the expense event
         boolean invalidDescr = false; // the flag variable for the validity of the description
+        // the cost of expense
+        double cost = -1.00f; // the user input for the cost of the expense
+        boolean invalidCost = false; // the flag variable for the validity of the cost
         // current date
         DateTimeFormatter dateFormat = EnvManager.getDateTimeFormatter(); // date format
         String date = LocalDate.now().format(dateFormat); // String containing of the current date
@@ -159,11 +162,13 @@ public class RecordBuilder {
         } while (!searchConfirm.equalsIgnoreCase("Y"));
 
 
-        // ask the user how many weeks
+        // ask the user to enter description
         System.out.println("\nEnter a simple description of the incurred expense event (e.g. \"fix leaking tap\").");
         do {
             if (invalidDescr) // invalid input, print the error message
-                System.out.println("\n[!] Invalid number of weeks. Please enter a positive integer.");
+                System.out.println("\n[!] Invalid description. Please follow the rule explained below."
+                        + "\n * Only alphanumerical letter, whitespace, hyphen, apostrophe, or underline are allowed."
+                        + "\n * Must start with alphanumerical letter. Allowed to use maximum 20 letters.");
             System.out.print("\nEnter the description: ");
 
             descr = kb.nextLine();
@@ -172,6 +177,38 @@ public class RecordBuilder {
         } while (!Validator.validateDescription(descr));
 
 
+        // ask the user how much the cost
+        System.out.println("\nHow much the cost is spent for this expense event?");
+        do {
+            if (invalidCost) // invalid input, print the error message
+                System.out.println("\n[!] Invalid expense cost. Please enter a positive number.");
+            System.out.print("\nEnter the cost: ");
+
+            try {
+                cost = kb.nextDouble();
+                kb.nextLine(); // consume "\n"
+            } catch (InputMismatchException exception) {
+                cost = -1.00f; // replace the weeks with invalid value
+                kb.nextLine(); // consume "\n"
+            }
+
+            invalidCost = true; // flag the invalidity for the next loop
+        } while (!Validator.validateCost(cost));
+
+
+        // instantiate a new Expense object with given data
+        Expense newExpense = new Expense(propertyID, descr, cost, date);
+
+
+        // add the record of new Expense collection to the arraylist of Expenses
+        expenses.add(newExpense);
+        DatabaseUtility.setIsSaved(false); // flag the change occurs
+
+
+        // display the transaction report
+        ViewUtility.displayExpenseDetail(newExpense);
+        System.out.print("\n (Press ENTER key to return to main menu)");
+        kb.nextLine();
         return;
     }
 }
