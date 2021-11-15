@@ -44,13 +44,23 @@ public class MenuUtility {
 
 
     /**
+     * Display the menu artwork for: Portfolio Report
+     */
+    public static void displayPortfolioReport() {
+        System.out.println();
+        System.out.println("    +++ Requesting a Portfolio Report +++");
+    }
+
+
+    /**
      * Display the available menu options to the console from the menu parameter.
-     * The last item of the parameter should be "Exit the Program" option.
+     * The last item of the parameter should be "Exit the Menu" option.
      *
      * @param menu - an array representation of menu options
+     * @param welcome - a String containing the welcome message
      */
-    public static void displayMenu(String[] menu) {
-        System.out.println("\nWelcome, administrator. Please select the option below: \n");
+    public static void displayMenu(String[] menu, String welcome) {
+        System.out.println(welcome);
         for (int i = 0; i < (menu.length - 1); i++) {
             System.out.println( "\t" + (i + optionMin) + ". " + menu[i]);
         }
@@ -63,7 +73,7 @@ public class MenuUtility {
      *
      * @param menu - an array representation of menu options
      * @param kb - a Scanner instance to get a keyboard input from the user
-     * @return the user's menu selection, adjusted to fit the switch statement in the main method
+     * @return the user's menu selection, adjusted to fit the switch statement
      */
     public static int getMenuSelect(String[] menu, Scanner kb) {
         boolean invalidOption = false; // flag variable for the validity of selection
@@ -87,7 +97,7 @@ public class MenuUtility {
         } while (!Validator.validateSelectMenu(option, optionMin, optionMax) && option != optionExit);
 
         // received the valid selection, convert to numbers as 1, 2, 3... to fit the switch statement
-        // do not convert if the input is match as exiting the program
+        // do not convert if the input is match as exiting the menu
         if (option != optionExit && (option - optionMin + 1) != optionExit)
             option -= (optionMin - 1);
 

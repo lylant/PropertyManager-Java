@@ -56,10 +56,11 @@ public class Main {
         MenuUtility.displayTitle();
 
         int menuOptionInput = -1;   // the user input for the menu selection
+        String menuWelcome = "\nWelcome, administrator. Please select the option below: \n";
 
         do {
 
-            MenuUtility.displayMenu(menuOptions);
+            MenuUtility.displayMenu(menuOptions, menuWelcome);
             menuOptionInput = MenuUtility.getMenuSelect(menuOptions, kb);
 
             switch(menuOptionInput) {
@@ -76,7 +77,7 @@ public class Main {
 
                 case 3:
                     // Portfolio Report
-                    System.out.println("3");
+                    ViewUtility.requestPortfolioReport(clients, properties, expenses, rents, kb);
                     break;
 
                 case 4:

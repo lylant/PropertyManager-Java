@@ -111,6 +111,15 @@ public class RecordBuilder {
     }
 
 
+    /**
+     * Add a expense record to specific property. The user can find and select the property by entering
+     * the property's address. The user should enter the description of the expense and the cost of the
+     * expense. The date of the expense event will be recorded as the current system date.
+     *
+     * @param properties - the arraylist of all properties
+     * @param expenses - the arraylist of all expenses to be updated
+     * @param kb - the Scanner instance to get a user input via a keyboard
+     */
     public static void recordExpense(ArrayList<Property> properties, ArrayList<Expense> expenses, Scanner kb) {
 
         /*

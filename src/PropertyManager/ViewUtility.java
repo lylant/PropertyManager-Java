@@ -1,6 +1,8 @@
 package PropertyManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /*
  * This class provides some displaying the information functionalities. Displaying the table of
@@ -73,5 +75,51 @@ public class ViewUtility {
         for (int i=0; i < 68; i++)
             System.out.print("-");
         System.out.println();
+    }
+    
+    
+    public static void requestPortfolioReport(ArrayList<Client> clients, ArrayList<Property> properties
+            , ArrayList<Expense> expenses, ArrayList<Rent> rents, Scanner kb) {
+
+        /*
+         *  initialize local variables:
+         */
+        // an array representation of menu options
+        String[] menuOptions = EnvManager.getReportOptions();
+        // a digit number to choose the exit program option
+        int menuOptionExit = EnvManager.getMenuOptionExit();
+        // the user input for the menu selection
+        int menuOptionInput = -1;
+        // the welcome message for the menu selection
+        String menuWelcome = "\nThis program provides three types of portpolio report."
+                + " Please select the option below: \n";
+
+
+        // display the menu welcome message
+        MenuUtility.displayPortfolioReport();
+
+
+        // provide a menu functionality
+        do {
+            MenuUtility.displayMenu(menuOptions, menuWelcome);
+            menuOptionInput = MenuUtility.getMenuSelect(menuOptions, kb);
+
+            switch(menuOptionInput) {
+                case 1: // specific client, searched by name
+                    System.out.println("1");
+                    return;
+                case 2: // all clients
+                    System.out.println("2");
+                    return;
+                case 3: // specified postcode
+                    System.out.println("3");
+                    return;
+                case 0: // exit to main menu
+                    return;
+                default: // no case match, an impossible case
+                    System.out.println("[!] Unidentified Error in ViewUtility.requestPortfolioReport().");
+                    break;
+            }
+        } while (menuOptionInput != menuOptionExit);
     }
 }
