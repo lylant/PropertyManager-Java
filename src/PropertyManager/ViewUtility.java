@@ -53,4 +53,25 @@ public class ViewUtility {
             System.out.print("-");
         System.out.println();
     }
+
+
+    /**
+     * Display the detail of a specific expense event
+     *
+     * @param expense - the expense event to be displayed
+     */
+    public static void displayExpenseDetail(Expense expense) {
+        // info box title
+        System.out.println("\n [*] The Summary of the Expense Event");
+        // info box border
+        for (int i=0; i < 68; i++)
+            System.out.print("-");
+        System.out.println();
+        // info box body
+        System.out.println(expense);
+        // info box border
+        for (int i=0; i < 68; i++)
+            System.out.print("-");
+        System.out.println();
+    }
 }
