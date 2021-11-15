@@ -6,6 +6,7 @@ package PropertyManager;
  * not be used further process of the program.
  */
 
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 
 public class EnvManager {
@@ -25,6 +26,9 @@ public class EnvManager {
 
     private static int menuOptionMin = 1;  // a minimum digit number of the option list
     private static int menuOptionExit = 0; // a digit number to choose the exit program option
+
+    // DecimalFormat for the monetary values
+    private static DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     // DateTimeFormatter for this program
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -77,6 +81,13 @@ public class EnvManager {
      */
     public static int getMenuOptionExit() {
         return menuOptionExit;
+    }
+
+    /**
+     * @return DecimalFormat for the monetary values
+     */
+    public static DecimalFormat getDecimalFormat() {
+        return decimalFormat;
     }
 
     /**
