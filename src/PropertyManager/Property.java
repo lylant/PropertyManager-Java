@@ -46,6 +46,21 @@ public class Property {
 
 
     /**
+     * Constructor
+     *
+     * @param ID - the unique numeric identifier for a property
+     * @param clientID - the client ID of the property's owner
+     */
+    public Property(int ID, int clientID) {
+        this.ID = ID;
+        address = new Address("N/A", "N/A", "N/A", "0000");
+        rentWeekly = -1;
+        managementRate = -1;
+        this.clientID = clientID;
+    }
+
+
+    /**
      * @return the summary details of the property
      */
     public String toString() {

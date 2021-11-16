@@ -52,6 +52,34 @@ public class Validator {
 
 
     /**
+     * Determine whether if the properties with specific clientID exists or not. Returns true if there
+     * is a match cast in the arraylist. The arraylist should be sorted by clientID before the validation.
+     * Overriding method of Comparator is inspired from: https://stackoverflow.com/a/34646172
+     *
+     * @param properties - the arraylist of all properties
+     * @param clientID - the clientID of interested
+     * @return the validity
+     */
+    public static boolean validatePropertyOwner(ArrayList<Property> properties, int clientID) {
+
+        int index = -1;
+
+        // perform a binary search to determine if the match case exists or not
+        // return value will be >= 0 if and only if the key is found
+        index = Collections.binarySearch
+                (properties, new Property(-1, clientID), new Comparator<Property>() {
+                    @Override
+                    public int compare(Property a, Property b) {
+                        return Integer.compare(a.getClientID(), b.getClientID());
+                    }
+                });
+
+        return (index >= 0);
+
+    }
+    
+    
+    /**
      * Validate Y/N input. Returns true if the input is one of "Y", "y", "N", "n".
      *
      * @param input - the user input for Y/N question
