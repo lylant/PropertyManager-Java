@@ -1,5 +1,6 @@
 package PropertyManager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,6 +12,22 @@ import java.util.Scanner;
  */
 
 public class ViewUtility {
+
+    // decimal format for the monetary value;
+    private static DecimalFormat df = EnvManager.getDecimalFormat();
+
+
+    /**
+     * Draw a border line with hyphen.
+     *
+     * @param length - the number of hyphen will be printed
+     */
+    public static void drawBorder(int length) {
+        for (int i=0; i < length; i++)
+            System.out.print("-");
+        System.out.println();
+    }
+
 
     /**
      * Display the detail of a specific property
@@ -24,15 +41,11 @@ public class ViewUtility {
         // info box title
         System.out.println("\n [*] The Detail of the Selected Property");
         // info box border
-        for (int i=0; i < 58; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(58);
         // info box body
         System.out.println(property);
         // info box border
-        for (int i=0; i < 58; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(58);
     }
 
 
@@ -45,15 +58,11 @@ public class ViewUtility {
         // info box title
         System.out.println("\n [*] The Summary of the Rent Collection Transaction");
         // info box border
-        for (int i=0; i < 66; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(66);
         // info box body
         System.out.println(rent);
         // info box border
-        for (int i=0; i < 66; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(66);
     }
 
 
@@ -66,15 +75,11 @@ public class ViewUtility {
         // info box title
         System.out.println("\n [*] The Summary of the Expense Event");
         // info box border
-        for (int i=0; i < 68; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(68);
         // info box body
         System.out.println(expense);
         // info box border
-        for (int i=0; i < 68; i++)
-            System.out.print("-");
-        System.out.println();
+        drawBorder(68);
     }
     
     

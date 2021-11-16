@@ -147,16 +147,12 @@ public class SearchUtility {
         String formatHeader = "%-2s%-4s%-2s%-52s%-2s%-22s%-2s";
         String formatBody = "%-2s%-4d%-2s%-52s%-2s%-22s%-2s";
         // table border
-        for (int i=0; i < 85; i++)
-            System.out.print("-");
-        System.out.println();
+        ViewUtility.drawBorder(85);
         // table header
         System.out.format(formatHeader, "| ", "ID", "| ", "Address", "| ", "Owner", "|");
         System.out.println();
         // table border
-        for (int i=0; i < 85; i++)
-            System.out.print("-");
-        System.out.println();
+        ViewUtility.drawBorder(85);
         // table body
         for (int i=0; i < search.size(); i++) {
             System.out.format(formatBody, "| ", search.get(i).getID(), "| "
@@ -165,9 +161,7 @@ public class SearchUtility {
             System.out.println();
         }
         // table border
-        for (int i=0; i < 85; i++)
-            System.out.print("-");
-        System.out.println();
+        ViewUtility.drawBorder(85);
 
 
         /*
