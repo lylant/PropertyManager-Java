@@ -36,8 +36,13 @@ public class EnvManager {
     // DecimalFormat for the monetary values
     private static DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-    // DateTimeFormatter for this program
+    // DateTimeFormatter for this program, dates only
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    // DateTimeFormatter for this program, for report use
+    private static DateTimeFormatter dateFormatDetail =
+            DateTimeFormatter.ofPattern("EEEE, yyyy MMMM dd, hh:mm:ssa");
+
 
 
     /**
@@ -104,9 +109,16 @@ public class EnvManager {
     }
 
     /**
-     * @return the DateTimeFormatter for this program
+     * @return the DateTimeFormatter for this program, date only
      */
     public static DateTimeFormatter getDateTimeFormatter() {
         return dateFormat;
+    }
+
+    /**
+     * @return the DateTimeFormatter for this program, report use
+     */
+    public static DateTimeFormatter getDateTimeDetailFormatter() {
+        return dateFormatDetail;
     }
 }
