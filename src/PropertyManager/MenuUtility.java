@@ -53,6 +53,15 @@ public class MenuUtility {
 
 
     /**
+     * Display the menu artwork for: Portfolio Report, Specific Client
+     */
+    public static void displayReportSpecificClient() {
+        System.out.println();
+        System.out.println("    +++ Generating a Portfolio Report for a Specific Client +++");
+    }
+
+
+    /**
      * Display the available menu options to the console from the menu parameter.
      * The last item of the parameter should be "Exit the Menu" option.
      *
