@@ -93,6 +93,32 @@ public class SearchUtility {
         return searchResults;
     }
 
+    
+    /**
+     * Search the clients that their name is containing specific search keyword. The user will
+     * be allowed to enter the search keyword until they get at least one result with the keyword.
+     *
+     * @param clients - the arraylist of all clients
+     * @param kb - the Scanner instance to get a user input via a keyboard
+     * @return the arraylist of clients matched to search
+     */
+    public static ArrayList<Client> searchClientsByName(ArrayList<Client> clients, Scanner kb) {
+
+        // initialize local variables:
+        ArrayList<Client> searchResults = null; // the arraylist to store the search results
+        String searchKeyword = null; // the search keyword entered by the user
+
+        do {
+            if (searchResults != null) // this will be ignored for the first attempt
+                System.out.println("\n[!] Your search - \"" + searchKeyword + "\" - did not match any records.");
+            System.out.print("\nEnter the search keyword: ");
+            searchKeyword = kb.nextLine();
+            searchResults = filterClientsByName(clients, searchKeyword);
+        } while (searchResults.size() == 0);
+
+        return searchResults;
+    }
+    
 
     /**
      * Search the properties that their address is containing specific search keyword. The user will
@@ -102,8 +128,7 @@ public class SearchUtility {
      * @param kb - the Scanner instance to get a user input via a keyboard
      * @return the arraylist of properties matched to search
      */
-    public static ArrayList<Property> searchPropertiesByAddress
-    (ArrayList<Property> properties, Scanner kb) {
+    public static ArrayList<Property> searchPropertiesByAddress(ArrayList<Property> properties, Scanner kb) {
 
         // initialize local variables:
         ArrayList<Property> searchResults = null; // the arraylist to store the search results
