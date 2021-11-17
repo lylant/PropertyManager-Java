@@ -10,6 +10,23 @@ import java.util.Comparator;
  */
 
 public class SortUtility {
+
+    
+    /**
+     * Sort the arraylist of Clients by their last name as an ascending order.
+     *
+     * @param clients - the arraylist of Clients to be sorted
+     */
+    public static void sortClientByLastName(ArrayList<Client> clients) {
+        Collections.sort(clients, new Comparator<Client>() {
+            @Override
+            public int compare(Client a, Client b) {
+                return a.getLastName().compareTo(b.getLastName());
+            }
+        });
+        return;
+    }
+    
     
     /**
      * Sort the arraylist of Properties by their ID as an ascending order.
