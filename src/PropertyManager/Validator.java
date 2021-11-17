@@ -60,7 +60,7 @@ public class Validator {
      * @param clientID - the clientID of interested
      * @return the validity
      */
-    public static boolean validatePropertyOwner(ArrayList<Property> properties, int clientID) {
+    public static boolean validateOwnerHasProperty(ArrayList<Property> properties, int clientID) {
 
         int index = -1;
 
@@ -76,6 +76,38 @@ public class Validator {
 
         return (index >= 0);
 
+    }
+
+
+    /**
+     * Determine whether if a specific client has a record of rent collection or expense. Returns true
+     * if there is at least one record in the arraylist. The arraylist of property should be sorted by
+     * clientID before the validation, the other arraylists should be sorted by propertyID.
+     * Overriding method of Comparator is inspired from: https://stackoverflow.com/a/34646172
+     *
+     * @param properties - the arraylist of all properties, sorted by clientID
+     * @param expenses - the arraylist of all expenses, sorted by propertyID
+     * @param rents - the arraylist of all rents, sorted by propertyID
+     * @param clientID - the clientID of interested
+     * @return the validity
+     */
+    public static boolean validateOwnerHasRentOrExpense(ArrayList<Property> properties, ArrayList<Expense> expenses
+            , ArrayList<Rent> rents, int clientID) {
+
+        // the variables for checking the record exists or not
+        double rentCheck = 0;
+        double expenseCheck = 0;
+
+        for (int i=0; i < properties.size(); i++) {
+            if (properties.get(i).getClientID() == clientID) {
+                rentCheck += properties.get(i).getTotalRent(rents);
+                expenseCheck += properties.get(i).getTotalExpenses(expenses);
+            }
+            if (properties.get(i).getClientID() > clientID)
+                break;
+        }
+
+        return ((rentCheck != 0) || (expenseCheck != 0));
     }
     
     
