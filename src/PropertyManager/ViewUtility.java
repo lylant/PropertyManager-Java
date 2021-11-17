@@ -201,6 +201,40 @@ public class ViewUtility {
         // info box border
         drawBorder(68);
     }
+
+
+    /**
+     * Display a portfolio report for a specific client. The user can designate the client(s) by
+     * entering the client's name. The search would return any and all clients whose name contained
+     * the search keyword and produce a portfolio report for that/those client(s).
+     *
+     * @param clients - the arraylist containing all Client instances
+     * @param properties - the arraylist containing all Property instances
+     * @param expenses - the arraylist containing all Expense instances
+     * @param rents - the arraylist containing all Rent instances
+     * @param kb - the Scanner instance to get an user input via a keyboard
+     */
+    public static void displayReportSpecificClient(ArrayList<Client> clients, ArrayList<Property> properties
+            , ArrayList<Expense> expenses, ArrayList<Rent> rents, Scanner kb) {
+
+        // the arraylist to store the search results 
+        ArrayList<Client> searchResults = null;
+
+        // display the menu welcome message
+        MenuUtility.displayReportSpecificClient();
+
+        // search the client
+        System.out.println("\nYou selected to generate a portfolio report for a specific client.");
+        System.out.println("You can find the client by searching the client's name.");
+        searchResults = SearchUtility.searchClientsByName(clients, kb);
+
+        // generate the report
+        displayReportClient(searchResults, properties, expenses, rents);
+
+        System.out.print("\n (Press ENTER key to return to main menu)");
+        kb.nextLine();
+        return;
+    }
     
     
     public static void requestPortfolioReport(ArrayList<Client> clients, ArrayList<Property> properties
