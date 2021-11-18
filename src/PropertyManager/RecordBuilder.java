@@ -156,6 +156,13 @@ public class RecordBuilder {
         searchResults = SearchUtility.searchPropertiesByAddress(properties, kb);
         SortUtility.sortPropertyByID(searchResults); // sort the search result by their IDs
 
+        if (searchResults.size() > 1) { // the search found 2+ properties, allow the user to select one
+            propertyID = SearchUtility.selectPropertyFromSearch(searchResults, kb);
+        }
+        else { // the search found only one property, select the property automatically
+            propertyID = searchResults.get(0).getID();
+        }
+
 
         // display the detail of property
         ViewUtility.displayPropertyDetail(propertiesHashMap.get(propertyID));

@@ -235,17 +235,11 @@ public class ViewUtility {
      * @param property - the property to be displayed
      */
     public static void displayPropertyDetail(Property property) {
-        // the hashmap of clients to convert clientID to their name
-        HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
-
-        // info box title
+        int borderLength = 58; // table border length
         System.out.println("\n [*] The Detail of the Selected Property");
-        // info box border
-        drawBorder(58);
-        // info box body
+        drawBorder(borderLength);
         System.out.println(property);
-        // info box border
-        drawBorder(58);
+        drawBorder(borderLength);
     }
 
 
