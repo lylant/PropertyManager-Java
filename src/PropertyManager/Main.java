@@ -114,7 +114,7 @@ public class Main {
         // the digit number to choose the exit program option
         int menuOptionExit = EnvManager.getMenuOptionExit();
         // the welcome message for the menu selection
-        String menuWelcome = "\nThis program provides three types of portpolio report."
+        String menuWelcome = "\nThis program provides three types of portfolio report."
                 + " Please select the option below: \n";
 
 
@@ -162,8 +162,8 @@ public class Main {
 
         // if unsaved change exists, ask confirm the exit
         if(!DatabaseUtility.getIsSaved()) {
-            System.out.println("\n [!] You have unsaved changes since the last save.");
-            System.out.println(" [!] Do you want to return to the main menu?");
+            System.out.println("\n[!] You have unsaved changes since the last save.");
+            System.out.println("[!] Do you want to return to the main menu?");
 
             do {
                 if (!Validator.validateYesOrNo(exitConfirm)) // invalid input, print the error message

@@ -371,7 +371,7 @@ public class DatabaseUtility {
 
         // no changes found, terminate the method
         if(isSaved) {
-            System.out.println("\n [!] No data changes found since the last save.");
+            System.out.println("\n[!] No data changes found since the last save.");
             return;
         }
 
@@ -400,12 +400,12 @@ public class DatabaseUtility {
             newRents.clear();
             isSaved = true;
 
-            System.out.println("\n [*] Save successful.");
+            System.out.println("\n[*] Save successful.");
             return;
 
         } catch (IOException exception) {
-            System.out.println(" [!] Error - I/O exception: " + exception.getMessage());
-            System.out.println(" [!] Your save has failed. Please check if the source files are corrupted.");
+            System.out.println("[!] Error - I/O exception: " + exception.getMessage());
+            System.out.println("[!] Your save has failed. Please check if the source files are corrupted.");
             return;
         }
     }
