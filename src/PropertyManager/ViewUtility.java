@@ -89,29 +89,29 @@ public class ViewUtility {
 
             // no property records, skip the contents
             if ( !Validator.validateOwnerHasProperty(properties, clients.get(i).getID()) ) {
-                ViewUtility.drawBorder(borderLength);
+                drawBorder(borderLength);
                 System.out.println(" [!] This client possesses no property.");
-                ViewUtility.drawBorder(borderLength);
+                drawBorder(borderLength);
                 continue;
             }
 
             // no rent/expense records, skip the contents
             if ( !Validator.validateOwnerHasRentOrExpense
                     (properties, sortedExpenses, sortedRents, clients.get(i).getID()) ) {
-                ViewUtility.drawBorder(borderLength);
+                drawBorder(borderLength);
                 System.out.println(" [!] This client has no rental/expense records yet.");
-                ViewUtility.drawBorder(borderLength);
+                drawBorder(borderLength);
                 continue;
             }
 
             // table border
-            ViewUtility.drawBorder(borderLength);
+            drawBorder(borderLength);
             // table header
             System.out.format(tableFormatBody, "| ", "Property", " |", "Rent", " |", "Expenses"
                     , " |", "Fee Rate", " |", "Fees", " |", "Net", " |");
             System.out.println();
-            // table border
-            ViewUtility.drawBorder(borderLength);
+            drawBorder(borderLength);
+
             // table body 1: find all properties from the client and print the detail of each property
             for (int j=0; j < properties.size(); j++) {
                 if (properties.get(j).getClientID() == clients.get(i).getID()) {
@@ -132,9 +132,9 @@ public class ViewUtility {
                 if (properties.get(j).getClientID() > clients.get(i).getID()) // no further record
                     break;
             }
-            // table border
-            ViewUtility.drawBorder(borderLength);
+
             // table body 2: sum values of all properties
+            drawBorder(borderLength);
             System.out.format(tableFormatBody, "| ", "TOTAL"
                     , " |", df.format(rentTotal)
                     , " |", df.format(expensesTotal)
@@ -143,9 +143,89 @@ public class ViewUtility {
                     , " |", df.format(rentTotal - expensesTotal - feeTotal)
                     , " |");
             System.out.println();
-            // table border
-            ViewUtility.drawBorder(borderLength);
+            drawBorder(borderLength);
         }
+    }
+
+
+    /**
+     * Display the portfolio report for the postcode. The report shows all property's data in the
+     * postcode area, such as rent, expenses, fee rate, fees, and net value. This method will not
+     * consider the case there is no property in the postcode since the search filters that case
+     * already. The report's output will be sorted by propertyID in ascending order.
+     *
+     * @param properties - the arraylist of all properties in the postcode area
+     * @param expenses - the arraylist of all expenses
+     * @param rents - the arraylist of all rents
+     */
+    private static void displayReportPostcode(ArrayList<Property> properties
+            , ArrayList<Expense> expenses, ArrayList<Rent> rents) {
+
+        /*
+         *  initialize local variables:
+         */
+
+        // table formatters
+        int borderLength = 114; // table border length
+        String tableFormatBody = "%2s%52s%2s%10s%2s%10s%2s%9s%2s%9s%2s%10s%2s"; // body formatter
+
+        // variables for evaluating the sum values
+        double rentTotal = 0;     // a cumulative value of rents of each property
+        double expensesTotal = 0; // a cumulative value of expenses of each property
+        double feeTotal = 0;      // a cumulative value of fee of each property
+
+        // current datetime
+        DateTimeFormatter dateFormat = EnvManager.getDateTimeDetailFormatter(); // formatter
+        String datetime = LocalDateTime.now().format(dateFormat); // String containing of the current datetime
+
+        // initial sorting
+        SortUtility.sortPropertyByID(properties);
+        ArrayList<Expense> sortedExpenses = SortUtility.sortCopiedExpenseByPropertyID(expenses);
+        ArrayList<Rent> sortedRents = SortUtility.sortCopiedRentsByPropertyID(rents);
+
+
+        // report title
+        drawBorder(borderLength);
+        System.out.println(" [*] PORTFOLIO REPORT");
+        System.out.println("Report Generated: " + datetime);
+
+        // table title
+        System.out.println("\n [*] Postcode: " + properties.get(0).getPostcode());
+
+        // table header
+        drawBorder(borderLength);
+        System.out.format(tableFormatBody, "| ", "Property", " |", "Rent", " |", "Expenses"
+                , " |", "Fee Rate", " |", "Fees", " |", "Net", " |");
+        System.out.println();
+        drawBorder(borderLength);
+
+        // table body 1: print the detail of each property in the postcode area
+        for (int i = 0; i < properties.size(); i++) {
+            rentTotal += properties.get(i).getTotalRent(sortedRents);
+            expensesTotal += properties.get(i).getTotalExpenses(sortedExpenses);
+            feeTotal += properties.get(i).getManagementFee(sortedRents);
+
+            System.out.format(tableFormatBody, "| ", properties.get(i).getAddress()
+                    , " |", df.format(properties.get(i).getTotalRent(sortedRents))
+                    , " |", df.format(properties.get(i).getTotalExpenses(sortedExpenses))
+                    , " |", df.format(properties.get(i).getManagementRate())
+                    , " |", df.format(properties.get(i).getManagementFee(sortedRents))
+                    , " |", df.format(properties.get(i).getNetBalance(sortedRents, sortedExpenses))
+                    , " |");
+            System.out.println();
+        }
+
+        // table body 2: sum values of all properties
+        drawBorder(borderLength);
+        System.out.format(tableFormatBody, "| ", "TOTAL"
+                , " |", df.format(rentTotal)
+                , " |", df.format(expensesTotal)
+                , " |", ""
+                , " |", df.format(feeTotal)
+                , " |", df.format(rentTotal - expensesTotal - feeTotal)
+                , " |");
+        System.out.println();
+        drawBorder(borderLength);
     }
     
 
@@ -175,14 +255,11 @@ public class ViewUtility {
      * @param rent - the rent collection event to be displayed
      */
     public static void displayRentDetail(Rent rent) {
-        // info box title
+        int borderLength = 66; // table border length
         System.out.println("\n [*] The Summary of the Rent Collection Transaction");
-        // info box border
-        drawBorder(66);
-        // info box body
+        drawBorder(borderLength);
         System.out.println(rent);
-        // info box border
-        drawBorder(66);
+        drawBorder(borderLength);
     }
 
 
@@ -192,14 +269,11 @@ public class ViewUtility {
      * @param expense - the expense event to be displayed
      */
     public static void displayExpenseDetail(Expense expense) {
-        // info box title
+        int borderLength = 68; // table border length
         System.out.println("\n [*] The Summary of the Expense Event");
-        // info box border
-        drawBorder(68);
-        // info box body
+        drawBorder(borderLength);
         System.out.println(expense);
-        // info box border
-        drawBorder(68);
+        drawBorder(borderLength);
     }
 
 
@@ -257,6 +331,38 @@ public class ViewUtility {
         kb.nextLine();
         return;
     }
+
+
+    /**
+     * Display a portfolio report for a specified postcode. The user can designate the postcode.
+     * The method will produce the report for all properties that are located in the entered postcode.
+     *
+     * @param properties - the arraylist containing all Property instances
+     * @param expenses - the arraylist containing all Expense instances
+     * @param rents - the arraylist containing all Rent instances
+     * @param kb - the Scanner instance to get an user input via a keyboard
+     */
+    public static void displayReportSpecificPostcode(ArrayList<Property> properties
+            , ArrayList<Expense> expenses, ArrayList<Rent> rents, Scanner kb) {
+
+        // the arraylist to store the search results 
+        ArrayList<Property> searchResults = null;
+
+        // display the menu welcome message
+        MenuUtility.displayReportSpecificPostcode();
+
+        // search the client
+        System.out.println("\nYou selected to generate a portfolio report for a specified postcode.");
+        System.out.println("The report will show all properties that are located in the postcode area.");
+        searchResults = SearchUtility.searchPropertiesByPostcode(properties, kb);
+
+        // generate the report
+        displayReportPostcode(searchResults, expenses, rents);
+
+        System.out.print("\n (Press ENTER key to return to main menu)");
+        kb.nextLine();
+        return;
+    }
     
     
     /**
@@ -304,7 +410,7 @@ public class ViewUtility {
                     displayReportAllClient(clients, properties, expenses, rents, kb);
                     return;
                 case 3: // specified postcode
-                    System.out.println("3");
+                    displayReportSpecificPostcode(properties, expenses, rents, kb);
                     return;
                 case 0: // exit to main menu
                     return;
