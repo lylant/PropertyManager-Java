@@ -146,6 +146,18 @@ public class Validator {
 
 
     /**
+     * Validate the postcode input. This method would check the String with RegEx.
+     *
+     * @param postcode - the postcode to be validated
+     * @return the validity
+     */
+    public static boolean validatePostcode(String postcode) {
+        String regEx = "[0-9]{4}";
+        return (Pattern.matches(regEx, postcode));
+    }
+
+
+    /**
      * Validate the cost of the expense event. Valid if the input is positive.
      *
      * @param cost - the cost of the expense event to be validated

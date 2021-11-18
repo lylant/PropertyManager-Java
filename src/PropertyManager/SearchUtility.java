@@ -147,6 +147,34 @@ public class SearchUtility {
 
 
     /**
+     * Search the properties that their postcode is equal to specific search keyword. The user will
+     * be allowed to enter the search keyword until they get at least one result with the keyword.
+     *
+     * @param properties - the arraylist of all properties
+     * @param kb - the Scanner instance to get a user input via a keyboard
+     * @return the arraylist of properties matched to search
+     */
+    public static ArrayList<Property> searchPropertiesByPostcode(ArrayList<Property> properties, Scanner kb) {
+
+        // initialize local variables:
+        ArrayList<Property> searchResults = null; // the arraylist to store the search results
+        String searchKeyword = "0000"; // the search keyword entered by the user
+
+        do {
+            if (!Validator.validatePostcode(searchKeyword)) // invalid input
+                System.out.println("\n[!] Invalid postcode. Please enter 4 digit numbers.");
+            else if (searchResults != null) // this will be ignored for the first attempt
+                System.out.println("\n[!] Your search - \"" + searchKeyword + "\" - did not match any records.");
+            System.out.print("\nEnter the postcode: ");
+            searchKeyword = kb.nextLine();
+            searchResults = filterPropertiesByPostcode(properties, searchKeyword);
+        } while (searchResults.size() == 0);
+
+        return searchResults;
+    }
+    
+    
+    /**
      * Allows the user to select a specific property from the search results.
      *
      * @param search - the arraylist of properties matched to search
