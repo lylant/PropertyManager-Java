@@ -39,6 +39,8 @@ public class Main {
 
         // loading failed: terminate the program
         if(rents.size() == 0) {
+            System.out.println("\n[!] Loading failed. If you did not choose to exit, "
+                    + "one or more of your files might be empty.");
             System.out.println("\nGood Bye.");
             return;
         }
@@ -90,6 +92,8 @@ public class Main {
                     break;
             }
         } while (menuOptionInput != menuOptionExit);
+
+        kb.close();
     }
 
 
