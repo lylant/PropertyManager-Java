@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Expense {
 
-    // decimal format for the monetary value;
+    // decimal format for the monetary value
     private static DecimalFormat df = EnvManager.getDecimalFormat();
 
 
