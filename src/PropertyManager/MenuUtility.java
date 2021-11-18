@@ -62,6 +62,15 @@ public class MenuUtility {
 
 
     /**
+     * Display the menu artwork for: Portfolio Report, Specified Postcode
+     */
+    public static void displayReportSpecificPostcode() {
+        System.out.println();
+        System.out.println("    +++ Generating a Portfolio Report for a Specified Postcode +++");
+    }
+
+
+    /**
      * Display the available menu options to the console from the menu parameter.
      * The last item of the parameter should be "Exit the Menu" option.
      *
