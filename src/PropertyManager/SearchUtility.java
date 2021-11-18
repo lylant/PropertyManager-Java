@@ -1,7 +1,6 @@
 package PropertyManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -61,9 +60,6 @@ public class SearchUtility {
         ArrayList<Property> searchResults = new ArrayList<>(properties.stream()
                 .filter(filterStreet.or(filterSuburb).or(filterState).or(filterPostcode))
                 .collect(Collectors.toList()));
-
-        // sort the search result by their IDs
-        SortUtility.sortPropertyByID(searchResults);
 
         return searchResults;
     }
@@ -187,39 +183,10 @@ public class SearchUtility {
         int propertyID = -1; // user input for the selection
         boolean invalidSelect = false; // flag variable for the validity of selection
 
-        // the hashmap of clients to convert clientID to their name
-        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
+        // display the search results
+        ViewUtility.displaySearchResult(search);
 
-
-        /*
-         * Search Results Table
-         */
-        // table title
-        System.out.println("\n [*] Search Results");
-        // table format
-        String formatHeader = "%-2s%-4s%-2s%-52s%-2s%-22s%-2s";
-        String formatBody = "%-2s%-4d%-2s%-52s%-2s%-22s%-2s";
-        // table border
-        ViewUtility.drawBorder(85);
-        // table header
-        System.out.format(formatHeader, "| ", "ID", "| ", "Address", "| ", "Owner", "|");
-        System.out.println();
-        // table border
-        ViewUtility.drawBorder(85);
-        // table body
-        for (int i=0; i < search.size(); i++) {
-            System.out.format(formatBody, "| ", search.get(i).getID(), "| "
-                    , search.get(i).getAddress(), "|"
-                    , clientsHashMap.get(search.get(i).getClientID()).getFullName(), "| ");
-            System.out.println();
-        }
-        // table border
-        ViewUtility.drawBorder(85);
-
-
-        /*
-         * Select the property
-         */
+        // Select the property
         System.out.println("\nPlease select the property for which the rent was collected.");
 
         do {

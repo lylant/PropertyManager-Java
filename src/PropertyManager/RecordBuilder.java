@@ -47,6 +47,7 @@ public class RecordBuilder {
         System.out.println("\nYou need to choose a specific property to add a new rent collection record.");
         System.out.println("You can find the property by searching the address of the property.");
         searchResults = SearchUtility.searchPropertiesByAddress(properties, kb);
+        SortUtility.sortPropertyByID(searchResults); // sort the search result by their IDs
 
         if (searchResults.size() > 1) { // the search found 2+ properties, allow the user to select one
             propertyID = SearchUtility.selectPropertyFromSearch(searchResults, kb);
@@ -152,6 +153,7 @@ public class RecordBuilder {
         System.out.println("\nYou need to choose a specific property the expense event was incurred.");
         System.out.println("You can find the property by searching the address of the property.");
         searchResults = SearchUtility.searchPropertiesByAddress(properties, kb);
+        SortUtility.sortPropertyByID(searchResults); // sort the search result by their IDs
 
 
         // display the detail of property

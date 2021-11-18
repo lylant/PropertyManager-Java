@@ -66,8 +66,8 @@ public class ViewUtility {
         // initial sorting
         SortUtility.sortClientByLastName(clients);
         SortUtility.sortPropertyByClientID(properties);
-        ArrayList<Expense> sortedExpenses = SortUtility.sortCopiedExpenseByPropertyID(expenses);
-        ArrayList<Rent> sortedRents = SortUtility.sortCopiedRentsByPropertyID(rents);
+        SortUtility.sortExpenseByPropertyID(expenses);
+        SortUtility.sortRentByPropertyID(rents);
 
 
         // report title
@@ -97,7 +97,7 @@ public class ViewUtility {
 
             // no rent/expense records, skip the contents
             if ( !Validator.validateOwnerHasRentOrExpense
-                    (properties, sortedExpenses, sortedRents, clients.get(i).getID()) ) {
+                    (properties, expenses, rents, clients.get(i).getID()) ) {
                 drawBorder(borderLength);
                 System.out.println(" [!] This client has no rental/expense records yet.");
                 drawBorder(borderLength);
@@ -116,16 +116,16 @@ public class ViewUtility {
             for (int j=0; j < properties.size(); j++) {
                 if (properties.get(j).getClientID() == clients.get(i).getID()) {
                     // accumulate the sum value
-                    rentTotal += properties.get(j).getTotalRent(sortedRents);
-                    expensesTotal += properties.get(j).getTotalExpenses(sortedExpenses);
-                    feeTotal += properties.get(j).getManagementFee(sortedRents);
+                    rentTotal += properties.get(j).getTotalRent(rents);
+                    expensesTotal += properties.get(j).getTotalExpenses(expenses);
+                    feeTotal += properties.get(j).getManagementFee(rents);
 
                     System.out.format(tableFormatBody, "| ", properties.get(j).getAddress()
-                            , " |", df.format(properties.get(j).getTotalRent(sortedRents))
-                            , " |", df.format(properties.get(j).getTotalExpenses(sortedExpenses))
+                            , " |", df.format(properties.get(j).getTotalRent(rents))
+                            , " |", df.format(properties.get(j).getTotalExpenses(expenses))
                             , " |", df.format(properties.get(j).getManagementRate())
-                            , " |", df.format(properties.get(j).getManagementFee(sortedRents))
-                            , " |", df.format(properties.get(j).getNetBalance(sortedRents, sortedExpenses))
+                            , " |", df.format(properties.get(j).getManagementFee(rents))
+                            , " |", df.format(properties.get(j).getNetBalance(rents, expenses))
                             , " |");
                     System.out.println();
                 }
@@ -180,8 +180,8 @@ public class ViewUtility {
 
         // initial sorting
         SortUtility.sortPropertyByID(properties);
-        ArrayList<Expense> sortedExpenses = SortUtility.sortCopiedExpenseByPropertyID(expenses);
-        ArrayList<Rent> sortedRents = SortUtility.sortCopiedRentsByPropertyID(rents);
+        SortUtility.sortExpenseByPropertyID(expenses);
+        SortUtility.sortRentByPropertyID(rents);
 
 
         // report title
@@ -201,16 +201,16 @@ public class ViewUtility {
 
         // table body 1: print the detail of each property in the postcode area
         for (int i = 0; i < properties.size(); i++) {
-            rentTotal += properties.get(i).getTotalRent(sortedRents);
-            expensesTotal += properties.get(i).getTotalExpenses(sortedExpenses);
-            feeTotal += properties.get(i).getManagementFee(sortedRents);
+            rentTotal += properties.get(i).getTotalRent(rents);
+            expensesTotal += properties.get(i).getTotalExpenses(expenses);
+            feeTotal += properties.get(i).getManagementFee(rents);
 
             System.out.format(tableFormatBody, "| ", properties.get(i).getAddress()
-                    , " |", df.format(properties.get(i).getTotalRent(sortedRents))
-                    , " |", df.format(properties.get(i).getTotalExpenses(sortedExpenses))
+                    , " |", df.format(properties.get(i).getTotalRent(rents))
+                    , " |", df.format(properties.get(i).getTotalExpenses(expenses))
                     , " |", df.format(properties.get(i).getManagementRate())
-                    , " |", df.format(properties.get(i).getManagementFee(sortedRents))
-                    , " |", df.format(properties.get(i).getNetBalance(sortedRents, sortedExpenses))
+                    , " |", df.format(properties.get(i).getManagementFee(rents))
+                    , " |", df.format(properties.get(i).getNetBalance(rents, expenses))
                     , " |");
             System.out.println();
         }
@@ -276,6 +276,39 @@ public class ViewUtility {
         drawBorder(borderLength);
     }
 
+
+    /**
+     * Display the search result of properties.
+     *
+     * @param search - the arraylist of properties matched to search
+     */
+    public static void displaySearchResult(ArrayList<Property> search) {
+        // table formatters
+        String formatHeader = "%-2s%-4s%-2s%-52s%-2s%-22s%-2s";
+        String formatBody = "%-2s%-4d%-2s%-52s%-2s%-22s%-2s";
+        int borderLength = 85;
+
+        // the hashmap of clients to convert clientID to their name
+        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
+
+
+        // table title
+        System.out.println("\n [*] Search Results");
+        // table header
+        drawBorder(borderLength);
+        System.out.format(formatHeader, "| ", "ID", "| ", "Address", "| ", "Owner", "|");
+        System.out.println();
+        drawBorder(borderLength);
+        // table body
+        for (int i=0; i < search.size(); i++) {
+            System.out.format(formatBody, "| ", search.get(i).getID(), "| "
+                    , search.get(i).getAddress(), "|"
+                    , clientsHashMap.get(search.get(i).getClientID()).getFullName(), "| ");
+            System.out.println();
+        }
+        drawBorder(borderLength);
+    }
+    
 
     /**
      * Display a portfolio report for a specific client. The user can designate the client(s) by
@@ -362,62 +395,5 @@ public class ViewUtility {
         System.out.print("\n (Press ENTER key to return to main menu)");
         kb.nextLine();
         return;
-    }
-    
-    
-    /**
-     * Display the menu to generate the on-screen portfolio report. The user is allowed to select
-     * the available portfolio report option from the menu. This method is used to call and provide
-     * proper parameters to the methods to generate an actual portfolio report.
-     *
-     * @param clients - the arraylist containing all Client instances
-     * @param properties - the arraylist containing all Property instances
-     * @param expenses - the arraylist containing all Expense instances
-     * @param rents - the arraylist containing all Rent instances
-     * @param kb - the Scanner instance to get an user input via a keyboard
-     */
-    public static void requestPortfolioReport(ArrayList<Client> clients, ArrayList<Property> properties
-            , ArrayList<Expense> expenses, ArrayList<Rent> rents, Scanner kb) {
-
-        /*
-         *  initialize local variables:
-         */
-        // an array representation of menu options
-        String[] menuOptions = EnvManager.getReportOptions();
-        // a digit number to choose the exit program option
-        int menuOptionExit = EnvManager.getMenuOptionExit();
-        // the user input for the menu selection
-        int menuOptionInput = -1;
-        // the welcome message for the menu selection
-        String menuWelcome = "\nThis program provides three types of portpolio report."
-                + " Please select the option below: \n";
-
-
-        // display the menu welcome message
-        MenuUtility.displayPortfolioReport();
-
-
-        // provide a menu functionality
-        do {
-            MenuUtility.displayMenu(menuOptions, menuWelcome);
-            menuOptionInput = MenuUtility.getMenuSelect(menuOptions, kb);
-
-            switch(menuOptionInput) {
-                case 1: // specific client, searched by name
-                    displayReportSpecificClient(clients, properties, expenses, rents, kb);
-                    return;
-                case 2: // all clients
-                    displayReportAllClient(clients, properties, expenses, rents, kb);
-                    return;
-                case 3: // specified postcode
-                    displayReportSpecificPostcode(properties, expenses, rents, kb);
-                    return;
-                case 0: // exit to main menu
-                    return;
-                default: // no case match, an impossible case
-                    System.out.println("[!] Unidentified Error in ViewUtility.requestPortfolioReport().");
-                    break;
-            }
-        } while (menuOptionInput != menuOptionExit);
     }
 }
