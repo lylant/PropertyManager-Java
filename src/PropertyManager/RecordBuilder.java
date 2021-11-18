@@ -101,6 +101,7 @@ public class RecordBuilder {
 
         // add the record of new Rent collection to the arraylist of Rents
         rents.add(newRent);
+        DatabaseUtility.storeNewRent(newRent); // store to the separated arraylist as well
         DatabaseUtility.setIsSaved(false); // flag the change occurs
 
 
@@ -213,6 +214,7 @@ public class RecordBuilder {
 
         // add the record of new Expense collection to the arraylist of Expenses
         expenses.add(newExpense);
+        DatabaseUtility.storeNewExpense(newExpense); // store to the separated arraylist as well
         DatabaseUtility.setIsSaved(false); // flag the change occurs
 
 

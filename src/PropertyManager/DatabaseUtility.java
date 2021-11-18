@@ -1,7 +1,7 @@
 package PropertyManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,11 +13,18 @@ import java.util.Scanner;
 
 public class DatabaseUtility {
 
+    // decimal format for the monetary value
+    private static DecimalFormat df = EnvManager.getDecimalFormat();
+
     // default source file names to be read
     private static String fileClients = EnvManager.getFileClients();
     private static String fileProperties = EnvManager.getFileProperties();
     private static String fileExpenses = EnvManager.getFileExpenses();
     private static String fileRents = EnvManager.getFileRents();
+
+    // arraylists to store new records of expense/rent, will be used for the save
+    private static ArrayList<Expense> newExpenses = new ArrayList<>();
+    private static ArrayList<Rent> newRents = new ArrayList<>();
 
     // flag to check whether if the record is saved or not
     private static boolean isSaved = true;
@@ -35,6 +42,24 @@ public class DatabaseUtility {
      */
     public static void setIsSaved(boolean save) {
         isSaved = save;
+    }
+
+    /**
+     * Store a new record to the Expenses arraylist which is separated from the main arraylist of Expense.
+     *
+     * @param newExpense - a new Expense instance to be stored
+     */
+    public static void storeNewExpense(Expense newExpense) {
+        newExpenses.add(newExpense);
+    }
+
+    /**
+     * Store a new record to the Rents arraylist which is separated from the main arraylist of Rent.
+     *
+     * @param newRent - a new Rent instance to be stored
+     */
+    public static void storeNewRent(Rent newRent) {
+        newRents.add(newRent);
     }
 
 
@@ -301,5 +326,87 @@ public class DatabaseUtility {
 
         // successfully loading completed
         return;
+    }
+
+    
+    /**
+     * Write a data of specific Expense instance in a specific file. This method will write 1 row of data.
+     * Each data field will be delimited by comma.
+     *
+     * @param expense - the Expense instance to be written
+     * @param outFile - the file containing data of expenses
+     */
+    private static void writeFileExpense(Expense expense, PrintWriter outFile) {
+        outFile.print(expense.getPropertyID() + ",");
+        outFile.print(expense.getDescription() + ",");
+        outFile.print(df.format(expense.getCost()) + ",");
+        outFile.println(expense.getDate());
+    }
+
+
+    /**
+     * Write a data of specific Rent instance in a specific file. This method will write 1 row of data.
+     * Each data field will be delimitted by comma.
+     *
+     * @param rent - the Rent instance to be written
+     * @param outFile - the file containing data of rents
+     */
+    private static void writeFileRent(Rent rent, PrintWriter outFile) {
+        outFile.print(rent.getPropertyID() + ",");
+        outFile.print(df.format(rent.getRentAmount()) + ",");
+        outFile.println(rent.getDate());
+    }
+
+
+    /**
+     * Save all rent and expense information entered by the user via the other menu items, to the proper
+     * files respectively. Pre-existing data in the files will be preserved. 
+     */
+    public static void saveChanges() {
+        // initialize the FileWriter and PrintWriter variables
+        FileWriter fwExpenses = null;
+        PrintWriter pwExpenses = null;
+        FileWriter fwRents = null;
+        PrintWriter pwRents = null;
+
+        // no changes found, terminate the method
+        if(isSaved) {
+            System.out.println("\n [!] No data changes found since the last save.");
+            return;
+        }
+
+        // perform the save
+        try {
+            // save expenses data
+            fwExpenses = new FileWriter(fileExpenses, true);
+            pwExpenses = new PrintWriter(fwExpenses);
+
+            for (int i = 0; i < newExpenses.size(); i++) {
+                writeFileExpense(newExpenses.get(i), pwExpenses);
+            }
+
+            // save rents data
+            fwRents = new FileWriter(fileRents, true);
+            pwRents = new PrintWriter(fwRents);
+
+            for (int i = 0; i < newRents.size(); i++) {
+                writeFileRent(newRents.get(i), pwRents);
+            }
+
+            // save process completed
+            pwExpenses.close();
+            pwRents.close();
+            newExpenses.clear();
+            newRents.clear();
+            isSaved = true;
+
+            System.out.println("\n [*] Save successful.");
+            return;
+
+        } catch (IOException exception) {
+            System.out.println(" [!] Error - I/O exception: " + exception.getMessage());
+            System.out.println(" [!] Your save has failed. Please check if the source files are corrupted.");
+            return;
+        }
     }
 }

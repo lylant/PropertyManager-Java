@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class ViewUtility {
     
-    // decimal format for the monetary value;
+    // decimal format for the monetary value
     private static DecimalFormat df = EnvManager.getDecimalFormat();
 
 
