@@ -238,6 +238,28 @@ public class ViewUtility {
 
 
     /**
+     * Display a portfolio report for all clients.
+     *
+     * @param clients - the arraylist containing all Client instances
+     * @param properties - the arraylist containing all Property instances
+     * @param expenses - the arraylist containing all Expense instances
+     * @param rents - the arraylist containing all Rent instances
+     * @param kb - the Scanner instance to get an user input via a keyboard
+     */
+    public static void displayReportAllClient(ArrayList<Client> clients, ArrayList<Property> properties
+            , ArrayList<Expense> expenses, ArrayList<Rent> rents, Scanner kb) {
+
+        // generate the report
+        System.out.println();
+        displayReportClient(clients, properties, expenses, rents);
+
+        System.out.print("\n (Press ENTER key to return to main menu)");
+        kb.nextLine();
+        return;
+    }
+    
+    
+    /**
      * Display the menu to generate the on-screen portfolio report. The user is allowed to select
      * the available portfolio report option from the menu. This method is used to call and provide
      * proper parameters to the methods to generate an actual portfolio report.
@@ -279,7 +301,7 @@ public class ViewUtility {
                     displayReportSpecificClient(clients, properties, expenses, rents, kb);
                     return;
                 case 2: // all clients
-                    System.out.println("2");
+                    displayReportAllClient(clients, properties, expenses, rents, kb);
                     return;
                 case 3: // specified postcode
                     System.out.println("3");

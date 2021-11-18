@@ -8,7 +8,8 @@ import java.util.HashMap;
 
 public class Property {
 
-    private static DecimalFormat df = new DecimalFormat("0.00"); // decimal format for the monetary
+    // decimal format for the monetary value
+    private static DecimalFormat df = EnvManager.getDecimalFormat();
 
     // DATA FIELDS
     private int ID;                   // a unique numeric identifier for a property
