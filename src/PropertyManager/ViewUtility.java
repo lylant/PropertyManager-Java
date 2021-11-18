@@ -278,6 +278,39 @@ public class ViewUtility {
 
 
     /**
+     * Display the search result of properties.
+     *
+     * @param search - the arraylist of properties matched to search
+     */
+    public static void displaySearchResult(ArrayList<Property> search) {
+        // table formatters
+        String formatHeader = "%-2s%-4s%-2s%-52s%-2s%-22s%-2s";
+        String formatBody = "%-2s%-4d%-2s%-52s%-2s%-22s%-2s";
+        int borderLength = 85;
+
+        // the hashmap of clients to convert clientID to their name
+        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
+
+
+        // table title
+        System.out.println("\n [*] Search Results");
+        // table header
+        drawBorder(borderLength);
+        System.out.format(formatHeader, "| ", "ID", "| ", "Address", "| ", "Owner", "|");
+        System.out.println();
+        drawBorder(borderLength);
+        // table body
+        for (int i=0; i < search.size(); i++) {
+            System.out.format(formatBody, "| ", search.get(i).getID(), "| "
+                    , search.get(i).getAddress(), "|"
+                    , clientsHashMap.get(search.get(i).getClientID()).getFullName(), "| ");
+            System.out.println();
+        }
+        drawBorder(borderLength);
+    }
+    
+
+    /**
      * Display a portfolio report for a specific client. The user can designate the client(s) by
      * entering the client's name. The search would return any and all clients whose name contained
      * the search keyword and produce a portfolio report for that/those client(s).
@@ -389,7 +422,7 @@ public class ViewUtility {
         // the user input for the menu selection
         int menuOptionInput = -1;
         // the welcome message for the menu selection
-        String menuWelcome = "\nThis program provides three types of portpolio report."
+        String menuWelcome = "\nThis program provides three types of portfolio report."
                 + " Please select the option below: \n";
 
 
