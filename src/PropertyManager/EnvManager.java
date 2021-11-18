@@ -41,7 +41,7 @@ public class EnvManager {
 
     // DateTimeFormatter for this program, for report use
     private static DateTimeFormatter dateFormatDetail =
-            DateTimeFormatter.ofPattern("EEEE, yyyy MMMM dd, hh:mm:ssa");
+            DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy, hh:mm:ssa");
 
 
 
