@@ -5,27 +5,21 @@ import java.util.HashMap;
 
 // This class represents a single rent collection event.
 
-public class Rent {
+public class Rent extends MonetaryEvent {
 
     // decimal format for the monetary value
     private static DecimalFormat df = EnvManager.getDecimalFormat();
     
     // DATA FIELDS
-    private int propertyID;    // the ID of the property for which the rent was collected
     private double rentAmount; // the monetary amount of rent collected
-    private String date;       // the date on which the rent was collected
-
-    // As this class is not used for processing date, the date is String datatype for the simplicity
-    // the date is in yyyy-MM-dd format
 
 
     /**
      * Non-Argument Constructor
      */
     public Rent() {
-        propertyID = -1;
+        super();
         rentAmount = -1;
-        date = "2000-01-01";
     }
 
     /**
@@ -36,9 +30,8 @@ public class Rent {
      * @param date - the date on which the rent was collected
      */
     public Rent(int ID, double rent, String date) {
-        propertyID = ID;
+        super(ID, date);
         rentAmount = rent;
-        this.date = date;
     }
 
 
@@ -47,26 +40,17 @@ public class Rent {
      */
     public String toString() {
         // the hashmaps to convert foreign IDs to meaningful information
-        HashMap<Integer, Client> clientsHashMap = HashMapContainer.getClientsHashMap();
         HashMap<Integer, Property> propertiesHashMap = HashMapContainer.getPropertiesHashMap();
 
-        String toStr = "Property Address:  " + propertiesHashMap.get(propertyID).getAddress()
-                + "\nProperty Owner:\t   "
-                + clientsHashMap.get(propertiesHashMap.get(propertyID).getClientID()).getFullName()
+        String toStr = "Property Address:  " + super.getPropertyAddress()
+                + "\nProperty Owner:\t   " + super.getPropertyOwnerName()
                 + "\nNumber of Weeks:   "
-                + (int)(rentAmount/propertiesHashMap.get(propertyID).getRentWeekly())
+                + (int)(rentAmount/propertiesHashMap.get(super.getPropertyID()).getRentWeekly())
                 + "\nMonetary Amount:   $ " + df.format(rentAmount)
-                + "\nCurrent Date:\t   " + date;
+                + "\nCurrent Date:\t   " + super.getDate();
         return toStr;
     }
 
-
-    /**
-     * @return the ID of the property for which the rent was collected
-     */
-    public int getPropertyID() {
-        return propertyID;
-    }
 
     /**
      * @return the monetary amount of rent collected
@@ -76,31 +60,9 @@ public class Rent {
     }
 
     /**
-     * @return the date on which the rent was collected
-     */
-    public String getDate() {
-        return date;
-    }
-
-
-    /**
-     * @param ID - the ID of the property for which the rent was collected
-     */
-    public void setPropertyID(int ID) {
-        propertyID = ID;
-    }
-
-    /**
      * @param rent - the monetary amount of rent collected
      */
     public void setRentAmount(double rent) {
         rentAmount = rent;
-    }
-
-    /**
-     * @param date - the date on which the rent was collected
-     */
-    public void setDate(String date) {
-        this.date = date;
     }
 }

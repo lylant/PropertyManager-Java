@@ -140,7 +140,7 @@ public class Validator {
      * @return the validity
      */
     public static boolean validateDescription(String descr) {
-        String regEx = "[a-zA-Z0-9][a-zA-Z0-9\\s-_']{0,19}";
+        String regEx = "[a-zA-Z0-9][a-zA-Z0-9\\s-_']{0,49}";
         return (Pattern.matches(regEx, descr));
     }
 

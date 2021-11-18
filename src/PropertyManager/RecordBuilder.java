@@ -180,7 +180,7 @@ public class RecordBuilder {
             if (invalidDescr) // invalid input, print the error message
                 System.out.println("\n[!] Invalid description. Please follow the rule explained below."
                         + "\n * Only alphanumerical letter, whitespace, hyphen, apostrophe, or underline are allowed."
-                        + "\n * Must start with alphanumerical letter. Allowed to use maximum 20 letters.");
+                        + "\n * Must start with alphanumerical letter. Allowed to use maximum 50 letters.");
             System.out.print("\nEnter the description: ");
 
             descr = kb.nextLine();
