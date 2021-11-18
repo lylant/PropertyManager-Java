@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
 public class EnvManager {
 
     // default source file names to be read
-    private static String fileClients = "clients.txt";
-    private static String fileProperties = "properties.txt";
-    private static String fileExpenses = "expenses.txt";
-    private static String fileRents = "rents.txt";
+    private static String fileClients = "resources/clients.txt";
+    private static String fileProperties = "resources/properties.txt";
+    private static String fileExpenses = "resources/expenses.txt";
+    private static String fileRents = "resources/rents.txt";
 
     // an array representation of main menu options
     private static String[] menuOptions = {"Record Rent Collection",
