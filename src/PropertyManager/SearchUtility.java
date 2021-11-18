@@ -61,9 +61,6 @@ public class SearchUtility {
                 .filter(filterStreet.or(filterSuburb).or(filterState).or(filterPostcode))
                 .collect(Collectors.toList()));
 
-        // sort the search result by their IDs
-        SortUtility.sortPropertyByID(searchResults);
-
         return searchResults;
     }
 

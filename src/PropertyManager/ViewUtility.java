@@ -66,8 +66,8 @@ public class ViewUtility {
         // initial sorting
         SortUtility.sortClientByLastName(clients);
         SortUtility.sortPropertyByClientID(properties);
-        ArrayList<Expense> sortedExpenses = SortUtility.sortCopiedExpenseByPropertyID(expenses);
-        ArrayList<Rent> sortedRents = SortUtility.sortCopiedRentsByPropertyID(rents);
+        SortUtility.sortExpenseByPropertyID(expenses);
+        SortUtility.sortRentByPropertyID(rents);
 
 
         // report title
@@ -97,7 +97,7 @@ public class ViewUtility {
 
             // no rent/expense records, skip the contents
             if ( !Validator.validateOwnerHasRentOrExpense
-                    (properties, sortedExpenses, sortedRents, clients.get(i).getID()) ) {
+                    (properties, expenses, rents, clients.get(i).getID()) ) {
                 drawBorder(borderLength);
                 System.out.println(" [!] This client has no rental/expense records yet.");
                 drawBorder(borderLength);
@@ -116,16 +116,16 @@ public class ViewUtility {
             for (int j=0; j < properties.size(); j++) {
                 if (properties.get(j).getClientID() == clients.get(i).getID()) {
                     // accumulate the sum value
-                    rentTotal += properties.get(j).getTotalRent(sortedRents);
-                    expensesTotal += properties.get(j).getTotalExpenses(sortedExpenses);
-                    feeTotal += properties.get(j).getManagementFee(sortedRents);
+                    rentTotal += properties.get(j).getTotalRent(rents);
+                    expensesTotal += properties.get(j).getTotalExpenses(expenses);
+                    feeTotal += properties.get(j).getManagementFee(rents);
 
                     System.out.format(tableFormatBody, "| ", properties.get(j).getAddress()
-                            , " |", df.format(properties.get(j).getTotalRent(sortedRents))
-                            , " |", df.format(properties.get(j).getTotalExpenses(sortedExpenses))
+                            , " |", df.format(properties.get(j).getTotalRent(rents))
+                            , " |", df.format(properties.get(j).getTotalExpenses(expenses))
                             , " |", df.format(properties.get(j).getManagementRate())
-                            , " |", df.format(properties.get(j).getManagementFee(sortedRents))
-                            , " |", df.format(properties.get(j).getNetBalance(sortedRents, sortedExpenses))
+                            , " |", df.format(properties.get(j).getManagementFee(rents))
+                            , " |", df.format(properties.get(j).getNetBalance(rents, expenses))
                             , " |");
                     System.out.println();
                 }
@@ -180,8 +180,8 @@ public class ViewUtility {
 
         // initial sorting
         SortUtility.sortPropertyByID(properties);
-        ArrayList<Expense> sortedExpenses = SortUtility.sortCopiedExpenseByPropertyID(expenses);
-        ArrayList<Rent> sortedRents = SortUtility.sortCopiedRentsByPropertyID(rents);
+        SortUtility.sortExpenseByPropertyID(expenses);
+        SortUtility.sortRentByPropertyID(rents);
 
 
         // report title
@@ -201,16 +201,16 @@ public class ViewUtility {
 
         // table body 1: print the detail of each property in the postcode area
         for (int i = 0; i < properties.size(); i++) {
-            rentTotal += properties.get(i).getTotalRent(sortedRents);
-            expensesTotal += properties.get(i).getTotalExpenses(sortedExpenses);
-            feeTotal += properties.get(i).getManagementFee(sortedRents);
+            rentTotal += properties.get(i).getTotalRent(rents);
+            expensesTotal += properties.get(i).getTotalExpenses(expenses);
+            feeTotal += properties.get(i).getManagementFee(rents);
 
             System.out.format(tableFormatBody, "| ", properties.get(i).getAddress()
-                    , " |", df.format(properties.get(i).getTotalRent(sortedRents))
-                    , " |", df.format(properties.get(i).getTotalExpenses(sortedExpenses))
+                    , " |", df.format(properties.get(i).getTotalRent(rents))
+                    , " |", df.format(properties.get(i).getTotalExpenses(expenses))
                     , " |", df.format(properties.get(i).getManagementRate())
-                    , " |", df.format(properties.get(i).getManagementFee(sortedRents))
-                    , " |", df.format(properties.get(i).getNetBalance(sortedRents, sortedExpenses))
+                    , " |", df.format(properties.get(i).getManagementFee(rents))
+                    , " |", df.format(properties.get(i).getNetBalance(rents, expenses))
                     , " |");
             System.out.println();
         }
