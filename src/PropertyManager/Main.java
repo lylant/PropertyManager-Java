@@ -80,7 +80,7 @@ public class Main {
                     requestPortfolioReport();
                     break;
                 case 4: // Save
-                    System.out.println("4");
+                    DatabaseUtility.saveChanges();
                     break;
                 case 0: // Exit the Program
                     System.out.println("Good Bye.");
